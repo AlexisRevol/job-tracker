@@ -1,0 +1,9 @@
+<div class="column">
+  <h3 class="column-title">{{ title }}</h3>
+  <div class="cards">
+    <app-candidature-card
+      *ngFor="let c of candidatures"
+      [candidature]="c">
+    </app-candidature-card>
+  </div>
+</div>

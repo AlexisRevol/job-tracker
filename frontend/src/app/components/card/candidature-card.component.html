@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-header">
+    <h4 class="poste">{{ candidature.poste }}</h4>
+    <span class="status-badge" [ngClass]="getStatusClass(candidature.statut)">
+      {{ candidature.statut }}
+    </span>
+  </div>
+
+  <div class="entreprise">{{ candidature.entreprise }}</div>
+
+  <div class="card-footer">
+    <span class="date">
+      {{ candidature.date_candidature | date:'dd MMM yyyy' }}
+    </span>
+  </div>
+</div>

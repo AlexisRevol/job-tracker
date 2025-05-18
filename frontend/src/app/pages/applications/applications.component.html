@@ -1,0 +1,21 @@
+<div class="kanban-board">
+  <app-application-column
+    title="Pas de réponse"
+    [candidatures]="candidaturesNoResponse">
+  </app-application-column>
+
+  <app-application-column
+    title="En cours"
+    [candidatures]="candidaturesInProgress">
+  </app-application-column>
+
+  <app-application-column
+    title="Refusé"
+    [candidatures]="candidaturesRejected">
+  </app-application-column>
+
+  <app-application-column
+    title="Accepté"
+    [candidatures]="candidaturesAccepted">
+  </app-application-column>
+</div>
