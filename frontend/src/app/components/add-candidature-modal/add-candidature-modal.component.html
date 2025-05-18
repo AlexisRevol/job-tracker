@@ -1,0 +1,42 @@
+<div class="modal-backdrop" *ngIf="isOpen">
+  <div class="modal">
+    <h2>Ajouter une candidature</h2>
+
+    <form (ngSubmit)="submitForm()" #form="ngForm" class="form-group">
+      <div class="form-field">
+        <label for="entreprise">Entreprise</label>
+        <input id="entreprise" name="entreprise" [(ngModel)]="candidature.entreprise" required />
+      </div>
+
+      <div class="form-field">
+        <label for="poste">Poste</label>
+        <input id="poste" name="poste" [(ngModel)]="candidature.poste" required />
+      </div>
+
+      <div class="form-field">
+        <label for="date">Date de candidature</label>
+        <input type="date" id="date" name="date_candidature" [(ngModel)]="candidature.date_candidature" required />
+      </div>
+
+      <div class="form-field">
+        <label for="statut">Statut</label>
+        <select id="statut" name="statut" [(ngModel)]="candidature.statut" required>
+          <option value="Pas de réponse">Pas de réponse</option>
+          <option value="En cours">En cours</option>
+          <option value="Refusé">Refusé</option>
+          <option value="Accepté">Accepté</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="commentaire">Commentaire</label>
+        <textarea id="commentaire" name="commentaire" [(ngModel)]="candidature.commentaire" rows="3"></textarea>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+        <button type="button" class="btn btn-secondary" (click)="close()">Annuler</button>
+      </div>
+    </form>
+  </div>
+</div>

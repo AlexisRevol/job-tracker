@@ -1,3 +1,13 @@
+<button class="add-button" (click)="openModal()">
+  + Ajouter une candidature
+</button>
+
+<app-add-candidature-modal
+  [isOpen]="isModalOpen"
+  (closeModal)="closeModal()"
+  (candidatureAdded)="handleNewCandidature($event)">
+</app-add-candidature-modal>
+
 <div class="kanban-board">
   <app-application-column
     title="Pas de réponse"
