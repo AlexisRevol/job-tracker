@@ -1,0 +1,30 @@
+[project]
+name = "api"
+version = "0.1.0"
+description = "Track job hiring process"
+authors = [
+    {name = "Alexis"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi (>=0.115.12,<0.116.0)",
+    "uvicorn (>=0.34.2,<0.35.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.11.10"
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]  # E: pycodestyle, F: pyflakes, I: isort
+ignore = []
+fixable = ["ALL"]  # Autorise le fix auto avec --fix

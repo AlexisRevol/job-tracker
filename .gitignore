@@ -1,0 +1,23 @@
+# Python / FastAPI (api/)
+api/__pycache__/
+api/.venv/
+api/.mypy_cache/
+api/.ruff_cache/
+api/poetry.lock
+
+# Ignorer l'environnement virtuel local
+.venv/
+
+# VSCode & IDE
+.vscode/
+*.code-workspace
+
+# Node / Angular (frontend/)
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/.env
+
+# Mac / OS specific
+.DS_Store
+Thumbs.db
