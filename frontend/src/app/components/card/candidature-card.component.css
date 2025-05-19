@@ -30,27 +30,31 @@
 
 .status-badge {
   padding: 4px 10px;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   font-weight: 500;
-  border-radius: 12px;
+  border-radius: 8px;
   text-transform: capitalize;
   color: #fff;
 }
 
 .status-badge.refused {
-  background-color: #ef5350;
+  background-color: #E3C8CD;
+  color: #8E4B51;
 }
 
 .status-badge.no-response {
-  background-color: #9e9e9e;
+  background-color: #D4E6F6;
+  color: #4778AE;
 }
 
 .status-badge.in-progress {
-  background-color: #42a5f5;
+  background-color: #DEE9CA;
+  color: #637D3F;
 }
 
 .status-badge.accepted {
-  background-color: #66bb6a;
+  background-color: #F4ECD1;
+  color: #86753F;
 }
 
 .card-footer {

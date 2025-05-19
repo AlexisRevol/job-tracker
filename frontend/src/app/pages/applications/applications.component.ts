@@ -1,11 +1,18 @@
 import { Component } from '@angular/core';
 import { ApplicationColumnComponent } from 'app/components/column/application-column.component';
 import { AddCandidatureModalComponent } from 'app/components/add-candidature-modal/add-candidature-modal.component';
+import { PlannerHeaderComponent } from 'app/components/planner-header/planner-header.component';
 import { Candidature } from 'app/models/candidature.model';
+import {
+  DragDropModule,
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-applications',
-  imports: [ApplicationColumnComponent, AddCandidatureModalComponent],
+  imports: [ApplicationColumnComponent, AddCandidatureModalComponent, PlannerHeaderComponent, DragDropModule],
   templateUrl: './applications.component.html',
   styleUrl: './applications.component.css'
 })
@@ -80,6 +87,24 @@ export class ApplicationsComponent {
       case 'Accepté':
         this.candidaturesAccepted.push(candidature);
         break;
+    }
+  }
+
+
+  drop(event: CdkDragDrop<Candidature[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
     }
   }
 }

@@ -6,19 +6,20 @@
 }
 
 .add-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
-  font-weight: 500;
+  background-color: #fff;
+  color: #5C8869;
   border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: background-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid #e0e0e0;
+  font-family: 'Inter', sans-serif;
 }
 
 .add-button:hover {
-  background-color: #0056b3;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  background-color: #fdfdfd;
+  box-shadow: 0 4px 12px rgba(240,240, 240,0.85);
+  cursor: pointer;
 }

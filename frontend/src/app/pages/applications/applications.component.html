@@ -1,5 +1,9 @@
+<app-planner-header>
+
+</app-planner-header>
+
 <button class="add-button" (click)="openModal()">
-  + Ajouter une candidature
+  + Ajouter
 </button>
 
 <app-add-candidature-modal
@@ -11,21 +15,25 @@
 <div class="kanban-board">
   <app-application-column
     title="Pas de réponse"
-    [candidatures]="candidaturesNoResponse">
+    [candidatures]="candidaturesNoResponse"
+    [dropFn]="drop.bind(this)">
   </app-application-column>
 
   <app-application-column
     title="En cours"
-    [candidatures]="candidaturesInProgress">
+    [candidatures]="candidaturesInProgress"
+    [dropFn]="drop.bind(this)">
   </app-application-column>
 
   <app-application-column
     title="Refusé"
-    [candidatures]="candidaturesRejected">
+    [candidatures]="candidaturesRejected"
+    [dropFn]="drop.bind(this)">
   </app-application-column>
 
   <app-application-column
     title="Accepté"
-    [candidatures]="candidaturesAccepted">
+    [candidatures]="candidaturesAccepted"
+    [dropFn]="drop.bind(this)">
   </app-application-column>
 </div>
