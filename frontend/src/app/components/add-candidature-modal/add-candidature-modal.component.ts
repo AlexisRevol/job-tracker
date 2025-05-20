@@ -25,7 +25,7 @@ export class AddCandidatureModalComponent {
   };
 
   submitForm() {
-    this.candidatureAdded.emit(this.candidature);
+    this.candidatureAdded.emit({...this.candidature});
     this.close();
   }
 

@@ -1,13 +1,17 @@
 <div class="column">
   <h3 class="column-title">{{ title }}</h3>
   <div
-    cdkDropList
+    style="min-height: 100px;"
+    cdkDropList 
     [cdkDropListData]="candidatures"
-    class="candidature-list"
-    (cdkDropListDropped)="drop($event)">
-    <div
-      *ngFor="let candidature of candidatures"
-      cdkDrag>
+    (cdkDropListDropped)="onDrop($event)"
+    class="candidature-list">
+
+    <!--<ng-container *ngIf="candidatures.length === 0">
+      <div class="placeholder">Déposez une candidature ici </div>
+    </ng-container>-->
+
+    <div *ngFor="let candidature of candidatures" cdkDrag>
       <app-candidature-card [candidature]="candidature"></app-candidature-card>
     </div>
   </div>

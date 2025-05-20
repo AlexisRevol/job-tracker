@@ -12,28 +12,13 @@
   (candidatureAdded)="handleNewCandidature($event)">
 </app-add-candidature-modal>
 
-<div class="kanban-board">
-  <app-application-column
-    title="Pas de réponse"
-    [candidatures]="candidaturesNoResponse"
-    [dropFn]="drop.bind(this)">
+<div class="kanban-board" cdkDropListGroup>
+  <ng-container *ngFor="let colonne of colonnes">
+    <app-application-column
+      [title]="colonne.titre"
+      [candidatures]="colonne.candidatures">
   </app-application-column>
-
-  <app-application-column
-    title="En cours"
-    [candidatures]="candidaturesInProgress"
-    [dropFn]="drop.bind(this)">
-  </app-application-column>
-
-  <app-application-column
-    title="Refusé"
-    [candidatures]="candidaturesRejected"
-    [dropFn]="drop.bind(this)">
-  </app-application-column>
-
-  <app-application-column
-    title="Accepté"
-    [candidatures]="candidaturesAccepted"
-    [dropFn]="drop.bind(this)">
-  </app-application-column>
+  </ng-container>
 </div>
+
+<app-spline-area-chart [colonnes]="colonnes"></app-spline-area-chart>
