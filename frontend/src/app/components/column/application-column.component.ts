@@ -14,21 +14,21 @@ import { DragDropModule, CdkDragDrop, transferArrayItem, moveItemInArray } from 
 export class ApplicationColumnComponent {
   @Input() title!: string;
   @Input() candidatures: Candidature[] = [];
+  @Output() candidatureMove = new EventEmitter<{ candidature: Candidature, ancienStatut: string, nouveauStatut: string }>();
+  @Output() addCandidatureClick = new EventEmitter<string>();
 
   onDrop(event: CdkDragDrop<Candidature[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      // Récupérer la candidature déplacée
-      const candidatureDéplacée = event.previousContainer.data[event.previousIndex];
-      candidatureDéplacée.statut = this.title;
-
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
+      const candidature = event.previousContainer.data[event.previousIndex];
+      const ancienStatut = candidature.statut;
+      const nouveauStatut = this.title;
+      this.candidatureMove.emit({ candidature, ancienStatut, nouveauStatut });
     }
+  }
+
+  addCandidature() {
+    this.addCandidatureClick.emit(this.title);
   }
 }

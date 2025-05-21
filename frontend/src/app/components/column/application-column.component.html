@@ -1,5 +1,9 @@
 <div class="column">
-  <h3 class="column-title">{{ title }}</h3>
+  <div class="column-header">
+    <h3 class="column-title">{{ title }}</h3>
+    <button class="add-candidature-btn" (click)="addCandidature()">+</button>
+  </div>
+
   <div
     style="min-height: 100px;"
     cdkDropList 

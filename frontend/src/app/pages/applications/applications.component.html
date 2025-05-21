@@ -2,12 +2,14 @@
 
 </app-planner-header>
 
+<!--
 <button class="add-button" (click)="openModal()">
   + Ajouter
-</button>
+</button>-->
 
 <app-add-candidature-modal
   [isOpen]="isModalOpen"
+  [defaultStatut]="modalColonneTitle"
   (closeModal)="closeModal()"
   (candidatureAdded)="handleNewCandidature($event)">
 </app-add-candidature-modal>
@@ -16,7 +18,10 @@
   <ng-container *ngFor="let colonne of colonnes">
     <app-application-column
       [title]="colonne.titre"
-      [candidatures]="colonne.candidatures">
+      [candidatures]="colonne.candidatures"
+      (candidatureMove)="onCandidatureMove($event)"
+      (addCandidatureClick)="openModalForColumn($event)"
+      >
   </app-application-column>
   </ng-container>
 </div>

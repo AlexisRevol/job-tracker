@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { Candidature } from 'app/models/candidature.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,9 +12,11 @@ import { FormsModule } from '@angular/forms';
 })
 export class AddCandidatureModalComponent {
   @Input() isOpen: boolean = false;
+  @Input() defaultStatut: string = 'Pas de réponse';
   @Output() closeModal = new EventEmitter<void>();
   @Output() candidatureAdded = new EventEmitter<Candidature>()
 
+  validStatuts = ['Pas de réponse', 'En cours', 'Refusé', 'Accepté'];
   candidature: Candidature = {
     id: 0,
     entreprise: '',
@@ -23,6 +25,28 @@ export class AddCandidatureModalComponent {
     statut: 'Pas de réponse',
     commentaire: '',
   };
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['isOpen'] && this.isOpen) {
+      // Modal s'ouvre : on reset la candidature avec le statut par défaut
+      this.resetForm();
+    }
+  }
+
+  resetForm() {
+    const statutParDefaut = this.defaultStatut && this.validStatuts.includes(this.defaultStatut) 
+                            ? this.defaultStatut 
+                            : 'Pas de réponse';
+
+    this.candidature = {
+      id: 0,
+      entreprise: '',
+      poste: '',
+      date_candidature: new Date(),
+      statut: statutParDefaut,
+      commentaire: '',
+    };
+  }
 
   submitForm() {
     this.candidatureAdded.emit({...this.candidature});

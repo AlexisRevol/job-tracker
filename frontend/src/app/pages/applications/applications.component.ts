@@ -6,6 +6,7 @@ import { PlannerHeaderComponent } from 'app/components/planner-header/planner-he
 import { SplineAreaChartComponent } from 'app/components/spline-area-chart/spline-area-chart.component';
 import { Candidature } from 'app/models/candidature.model';
 import { Colonne } from 'app/models/column.model';
+import { CandidatureService } from 'app/services/CandidatureService';
 
 import {
   DragDropModule,
@@ -22,87 +23,35 @@ import {
   styleUrl: './applications.component.css'
 })
 export class ApplicationsComponent {
+  colonnes: Colonne[] = [];
   isModalOpen = false;
+  modalColonneTitle: string = '';
 
-   colonnes: Colonne[] = [
-    {
-      titre: 'Pas de réponse',
-      candidatures: [
-        {
-          id: 1,
-          entreprise: 'OpenAI',
-          poste: 'Développeur Backend',
-          date_candidature: new Date('2025-05-01'),
-          statut: 'Pas de réponse',
-          commentaire: 'Envoyé par LinkedIn'
-        }
-      ]
-    },
-    {
-      titre: 'En cours',
-      candidatures: [
-        {
-          id: 2,
-          entreprise: 'Google',
-          poste: 'SWE',
-          date_candidature: new Date('2025-05-03'),
-          statut: 'En cours',
-          commentaire: 'Test technique passé'
-        }
-      ]
-    },
-    {
-      titre: 'Refusé',
-      candidatures: [
-        {
-          id: 3,
-          entreprise: 'Amazon',
-          poste: 'DevOps',
-          date_candidature: new Date('2025-04-28'),
-          statut: 'Refusé',
-          commentaire: 'Mail de refus reçu'
-        }
-      ]
-    },
-    {
-      titre: 'Accepté',
-      candidatures: [
-        {
-          id: 4,
-          entreprise: 'Microsoft',
-          poste: 'Ingénieur Logiciel',
-          date_candidature: new Date('2025-05-02'),
-          statut: 'Accepté',
-          commentaire: 'Contrat signé'
-        }
-      ]
-    }
-  ];
+  constructor(private candidatureService: CandidatureService) {}
 
-  openModal() {
+   ngOnInit() {
+    this.candidatureService.colonnes$.subscribe(cols => {
+      this.colonnes = cols;
+    });
+  }
+
+  openModalForColumn(titreColonne: string) {
+    this.modalColonneTitle = titreColonne;
     this.isModalOpen = true;
   }
 
   closeModal() {
     this.isModalOpen = false;
+    this.modalColonneTitle = '';
   }
 
   handleNewCandidature(candidature: Candidature) {
-    console.log('Nouvelle candidature :', candidature);
+    this.candidatureService.addCandidature(candidature);
+    this.closeModal();
+  }
 
-    const colonneCorrespondante = this.colonnes.find(
-      col => col.titre === candidature.statut
-    );
-
-    if (colonneCorrespondante) {
-      colonneCorrespondante.candidatures.push(candidature);
-    } else {
-      console.warn(`Statut inconnu : ${candidature.statut}`);
-      // Optionnel : créer une nouvelle colonne dynamiquement ?
-      // this.colonnes.push({ titre: candidature.statut, candidatures: [candidature] });
-    }
-
-    // Appel éventuel à un backend ici
+  onCandidatureMove(event: { candidature: Candidature, ancienStatut: string, nouveauStatut: string }) {
+    this.candidatureService.moveCandidature(event.candidature, event.ancienStatut, event.nouveauStatut);
   }
 
 
