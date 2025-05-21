@@ -64,3 +64,38 @@
   padding-right: 6px;        /* espace pour le scroll */
 }
 
+.column-header {
+  display: flex;
+  align-items: center;      /* aligne verticalement */
+  justify-content: space-between; /* espace entre titre et bouton */
+  margin-bottom: 0.5rem;
+}
+
+.add-candidature-btn {
+  background-color: transparent;
+  border: 1.5px solid #6c757d; /* gris doux */
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 1rem;
+  color: #6c757d;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  padding: 0;
+  line-height: 1;
+}
+
+.add-candidature-btn:hover {
+  background-color: #6c757d;
+  color: white;
+  border-color: #6c757d;
+}
+
+.add-candidature-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(108, 117, 125, 0.5);
+}
+
