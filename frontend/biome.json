@@ -7,7 +7,13 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"ignore": []
+		"ignore": [
+			"dist/**",
+			"node_modules/**",
+			".angular/**",
+			"coverage/**",
+			"tsconfig*.json"
+		]
 	},
 	"formatter": {
 		"enabled": true,

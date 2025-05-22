@@ -1,74 +1,74 @@
 .planner-header {
-  background: linear-gradient(to right, #905DCF, #486BCB);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 24px;
-  border-radius: 12px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-family: 'Inter', sans-serif;
+	background: linear-gradient(to right, #905dcf, #486bcb);
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 24px;
+	border-radius: 12px;
+	position: relative;
+	overflow: hidden;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	font-family: "Inter", sans-serif;
 }
 
 /* Vagues décoratives en fond */
 .planner-header::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('assets/waves.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  opacity: 0.2;
-  pointer-events: none;
-  z-index: 0;
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url("assets/waves.svg");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	opacity: 0.2;
+	pointer-events: none;
+	z-index: 0;
 }
 
 /* Placer le contenu au-dessus du fond */
 .planner-header > * {
-  position: relative;
-  z-index: 1;
+	position: relative;
+	z-index: 1;
 }
 
 .date {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  line-height: 1.2;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	line-height: 1.2;
 }
 
 .day,
 .month {
-  font-size: 12px;
-  letter-spacing: 1px;
+	font-size: 12px;
+	letter-spacing: 1px;
 }
 
 .number {
-  font-size: 24px;
-  font-weight: bold;
+	font-size: 24px;
+	font-weight: bold;
 }
 
 .message {
-  flex-grow: 1;
-  padding-left: 90px;
+	flex-grow: 1;
+	padding-left: 90px;
 }
 
 .greeting {
-  font-size: 18px;
-  font-weight: bold;
+	font-size: 18px;
+	font-weight: bold;
 }
 
 .subtext {
-  font-size: 14px;
-  margin-top: 4px;
+	font-size: 14px;
+	margin-top: 4px;
 }
 
 .tasks {
-  white-space: nowrap;
-  font-size: 14px;
+	white-space: nowrap;
+	font-size: 14px;
 }

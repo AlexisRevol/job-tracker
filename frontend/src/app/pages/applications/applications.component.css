@@ -1,25 +1,25 @@
 .kanban-board {
-  display: flex;
-  gap: 1.5rem;
-  padding: 1.5rem;
-  overflow-x: auto;
+	display: flex;
+	gap: 1.5rem;
+	padding: 1.5rem;
+	overflow-x: auto;
 }
 
 .add-button {
-  background-color: #fff;
-  color: #5C8869;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  border: 1px solid #e0e0e0;
-  font-family: 'Inter', sans-serif;
+	background-color: #fff;
+	color: #5c8869;
+	border-radius: 8px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	border: 1px solid #e0e0e0;
+	font-family: "Inter", sans-serif;
 }
 
 .add-button:hover {
-  background-color: #fdfdfd;
-  box-shadow: 0 4px 12px rgba(240,240, 240,0.85);
-  cursor: pointer;
+	background-color: #fdfdfd;
+	box-shadow: 0 4px 12px rgba(240, 240, 240, 0.85);
+	cursor: pointer;
 }

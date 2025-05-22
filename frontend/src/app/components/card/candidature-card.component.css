@@ -1,67 +1,67 @@
 .card {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  border: 1px solid #e0e0e0;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.85rem; 
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+	padding: 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	border: 1px solid #e0e0e0;
+	font-family: "Inter", sans-serif;
+	font-size: 0.85rem;
 }
 
 .card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .poste {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0;
-  color: #333;
+	font-size: 1rem;
+	font-weight: 600;
+	margin: 0;
+	color: #333;
 }
 
 .entreprise {
-  font-size: 0.9rem;
-  color: #666;
+	font-size: 0.9rem;
+	color: #666;
 }
 
 .status-badge {
-  padding: 4px 10px;
-  font-size: 0.65rem;
-  font-weight: 500;
-  border-radius: 8px;
-  text-transform: capitalize;
-  color: #fff;
+	padding: 4px 10px;
+	font-size: 0.65rem;
+	font-weight: 500;
+	border-radius: 8px;
+	text-transform: capitalize;
+	color: #fff;
 }
 
 .status-badge.refused {
-  background-color: #E3C8CD;
-  color: #8E4B51;
+	background-color: #e3c8cd;
+	color: #8e4b51;
 }
 
 .status-badge.no-response {
-  background-color: #D4E6F6;
-  color: #4778AE;
+	background-color: #d4e6f6;
+	color: #4778ae;
 }
 
 .status-badge.in-progress {
-  background-color: #DEE9CA;
-  color: #637D3F;
+	background-color: #dee9ca;
+	color: #637d3f;
 }
 
 .status-badge.accepted {
-  background-color: #F4ECD1;
-  color: #86753F;
+	background-color: #f4ecd1;
+	color: #86753f;
 }
 
 .card-footer {
-  margin-top: 8px;
-  border-top: 1px solid #eee;
-  padding-top: 6px;
-  font-size: 0.8rem;
-  color: #999;
+	margin-top: 8px;
+	border-top: 1px solid #eee;
+	padding-top: 6px;
+	font-size: 0.8rem;
+	color: #999;
 }
