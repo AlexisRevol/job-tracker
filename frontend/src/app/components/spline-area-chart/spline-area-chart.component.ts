@@ -81,7 +81,8 @@ export class SplineAreaChartComponent {
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
-		if (changes["colonnes"]) {
+		// biome-ignore lint/complexity/useLiteralKeys: accédé par index pour compatibilité TS
+		if ("colonnes" in changes && changes["colonnes"]) {
 			this.updateChart();
 		}
 	}
@@ -89,11 +90,11 @@ export class SplineAreaChartComponent {
 	updateChart() {
 		// Récupérer toutes les dates uniques au format 'yyyy-MM-dd'
 		const allDatesSet = new Set<string>();
-		this.colonnes.forEach((col) => {
-			col.candidatures.forEach((c) => {
+		for (const col of this.colonnes) {
+			for (const c of col.candidatures) {
 				allDatesSet.add(formatDate(c.date_candidature, "yyyy-MM-dd", "fr"));
-			});
-		});
+			}
+		}
 		const allDates = Array.from(allDatesSet).sort();
 
 		// Pour chaque colonne (statut), compter les candidatures par date

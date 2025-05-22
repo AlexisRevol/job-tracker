@@ -34,8 +34,8 @@ export class AddCandidatureModalComponent {
 	};
 
 	ngOnChanges(changes: SimpleChanges) {
-		if (changes["isOpen"] && this.isOpen) {
-			// Modal s'ouvre : on reset la candidature avec le statut par défaut
+		// biome-ignore lint/complexity/useLiteralKeys: accédé par index pour compatibilité TS
+		if ("isOpen" in changes && changes["isOpen"] && this.isOpen) {
 			this.resetForm();
 		}
 	}
