@@ -8,6 +8,10 @@ api/poetry.lock
 __pycache__/
 *.pyc
 
+# Bases de données SQLite
+*.db
+*.sqlite3
+
 # Ignorer l'environnement virtuel local
 .venv/
 
