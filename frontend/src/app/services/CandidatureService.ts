@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Colonne } from '../models/column.model';
@@ -5,6 +6,8 @@ import { Candidature } from '../models/candidature.model';
 
 @Injectable({ providedIn: 'root' })
 export class CandidatureService {
+  private apiUrl = 'http://localhost:8000/candidatures';
+
   private colonnesSubject = new BehaviorSubject<Colonne[]>(this.mockData());
   colonnes$ = this.colonnesSubject.asObservable();
 
@@ -65,6 +68,9 @@ export class CandidatureService {
     ];
   }
 
+  constructor(private http: HttpClient) {}
+
+
   getColonnes(): Colonne[] {
     return this.colonnesSubject.getValue();
   }
@@ -95,5 +101,13 @@ export class CandidatureService {
     target.candidatures.push(c);
 
     this.colonnesSubject.next([...colonnes]);
+  }
+
+  getCandidaturesFromServer() {
+    return this.http.get<Candidature[]>(this.apiUrl);
+  }
+
+  createCandidature(c: Candidature) {
+    return this.http.post<Candidature>(this.apiUrl, c);
   }
 }
