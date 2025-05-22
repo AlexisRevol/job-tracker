@@ -1,4 +1,4 @@
-name: Run API tests
+name: Lint and Test
 
 on: [push, pull_request]
 
@@ -28,6 +28,10 @@ jobs:
       working-directory: ./api
       run: |
         poetry install
+
+    - name: Run Ruff lint check
+      working-directory: ./api
+      run: poetry run ruff check .
 
     - name: Run tests
       working-directory: ./api
