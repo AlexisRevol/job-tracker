@@ -11,7 +11,7 @@ def get_candidatures(db: Session) -> List[DBCandidature]:
 
 
 def create_candidature(db: Session, candidature: CandidatureCreate) -> DBCandidature:
-    db_candidature = DBCandidature(**candidature.dict())
+    db_candidature = DBCandidature(**candidature.model_dump())
     db.add(db_candidature)
     db.commit()
     db.refresh(db_candidature)

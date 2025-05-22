@@ -3,7 +3,10 @@ api/__pycache__/
 api/.venv/
 api/.mypy_cache/
 api/.ruff_cache/
+api/.pytest_cache/
 api/poetry.lock
+__pycache__/
+*.pyc
 
 # Ignorer l'environnement virtuel local
 .venv/

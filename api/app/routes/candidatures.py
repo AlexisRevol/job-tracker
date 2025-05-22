@@ -1,27 +1,11 @@
-from typing import Generator
-
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from app.crud import candidature as crud
-from app.database import SessionLocal
+from app.crud import candidatures as crud
+from app.database import get_db
 from app.schemas.candidature import Candidature, CandidatureCreate
 
 router = APIRouter()
-
-
-def get_db() -> Generator[Session, None, None]:
-    """
-    Fournit une session de base de données pour la durée d'une requête.
-
-    Yields:
-        Generator[Session, None, None]: Une session SQLAlchemy active.
-    """
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 @router.get("/", response_model=list[Candidature])
