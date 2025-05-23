@@ -1,9 +1,4 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule, formatDate } from '@angular/common';
 import { Colonne } from 'app/models/column.model';
 import {
@@ -18,7 +13,7 @@ import {
   ApexTitleSubtitle,
   ApexFill,
   ApexTooltip,
-  NgApexchartsModule
+  NgApexchartsModule,
 } from 'ng-apexcharts';
 
 export type ChartOptions = {

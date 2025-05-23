@@ -1,9 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Candidature } from 'app/models/candidature.model';
 import { CandidatureCardComponent } from '../card/candidature-card.component';
 import { NgFor, CommonModule } from '@angular/common';
@@ -31,7 +26,8 @@ export class ApplicationColumnComponent {
   @Output() addCandidatureClick = new EventEmitter<string>();
 
   onDrop(event: CdkDragDrop<Candidature[]>) {
-    if (event.previousContainer === event.container) {
+    if (event.previousContainer.data === event.container.data) {
+      //if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
         event.previousIndex,

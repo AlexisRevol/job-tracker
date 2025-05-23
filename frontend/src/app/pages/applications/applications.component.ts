@@ -1,7 +1,4 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApplicationColumnComponent } from 'app/components/column/application-column.component';
 import { AddCandidatureModalComponent } from 'app/components/add-candidature-modal/add-candidature-modal.component';
@@ -11,9 +8,10 @@ import { Candidature } from 'app/models/candidature.model';
 import { Colonne } from 'app/models/column.model';
 import { CandidatureService } from 'app/services/CandidatureService';
 
-import {
-  DragDropModule,
-} from '@angular/cdk/drag-drop';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-applications',
@@ -28,27 +26,38 @@ import {
   templateUrl: './applications.component.html',
   styleUrl: './applications.component.css',
 })
-export class ApplicationsComponent implements OnInit {
+export class ApplicationsComponent implements OnInit, OnDestroy {
   colonnes: Colonne[] = [];
-  isModalOpen = false;
-  modalColonneTitle = '';
+  modalState = {
+    isOpen: false,
+    title: '',
+  };
+
+  private destroy$ = new Subject<void>();
 
   constructor(private candidatureService: CandidatureService) {}
 
   ngOnInit() {
-    this.candidatureService.colonnes$.subscribe((cols) => {
-      this.colonnes = cols;
-    });
+    this.candidatureService.colonnes$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((cols) => {
+        this.colonnes = cols;
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   openModalForColumn(titreColonne: string) {
-    this.modalColonneTitle = titreColonne;
-    this.isModalOpen = true;
+    this.modalState.title = titreColonne;
+    this.modalState.isOpen = true;
   }
 
   closeModal() {
-    this.isModalOpen = false;
-    this.modalColonneTitle = '';
+    this.modalState.isOpen = false;
+    this.modalState.title = '';
   }
 
   handleNewCandidature(candidature: Candidature) {

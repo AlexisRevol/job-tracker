@@ -93,7 +93,9 @@ export class CandidatureService {
     const source = colonnes.find((col) => col.titre === ancienStatut);
     const target = colonnes.find((col) => col.titre === nouveauStatut);
 
-    if (!source || !target) {return;}
+    if (!source || !target) {
+      return;
+    }
 
     source.candidatures = source.candidatures.filter(
       (cand) => cand.id !== c.id,
