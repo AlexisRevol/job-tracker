@@ -20,14 +20,13 @@ jobs:
         curl -sSL https://install.python-poetry.org | python3 -
         echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-    - name: Change to API directory
-      working-directory: ./api
-      run: echo "Moved to API directory"
-
     - name: Install dependencies
       working-directory: ./api
-      run: |
-        poetry install
+      run: poetry install
+
+    - name: Set environment variable for SECRET_KEY
+      working-directory: ./api
+      run: echo "SECRET_KEY=testsecretkey" >> $GITHUB_ENV
 
     - name: Run Ruff lint check
       working-directory: ./api
@@ -35,5 +34,4 @@ jobs:
 
     - name: Run tests
       working-directory: ./api
-      run: |
-        poetry run pytest
+      run: poetry run pytest
