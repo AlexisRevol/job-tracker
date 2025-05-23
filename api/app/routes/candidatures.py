@@ -3,13 +3,17 @@ from sqlalchemy.orm import Session
 
 from app.crud import candidatures as crud
 from app.database import get_db
-from app.schemas.candidature import Candidature, CandidatureCreate, CandidatureCreateBis
+from app.models.user import User as DBUser
+from app.schemas.candidature import Candidature, CandidatureCreate
+from app.security.deps import get_current_user
 
 router = APIRouter()
 
 
 @router.get("/", response_model=list[Candidature])
-def read_candidatures(db: Session = Depends(get_db)) -> list[Candidature]:
+def read_candidatures(
+    db: Session = Depends(get_db), current_user: DBUser = Depends(get_current_user)
+) -> list[Candidature]:
     """
     Récupère la liste de toutes les candidatures.
 
@@ -24,7 +28,9 @@ def read_candidatures(db: Session = Depends(get_db)) -> list[Candidature]:
 
 @router.post("/", response_model=Candidature)
 def add_candidature(
-    candidature: CandidatureCreate, db: Session = Depends(get_db)
+    candidature: CandidatureCreate,
+    db: Session = Depends(get_db),
+    current_user: DBUser = Depends(get_current_user),
 ) -> Candidature:
     """
     Crée une nouvelle candidature à partir des données reçues.
@@ -36,7 +42,4 @@ def add_candidature(
     Returns:
         Candidature: La candidature créée avec son ID attribué.
     """
-    fake_user_id = 1  # 🔥 simulé pour l'instant
-    candidature_dict = candidature.model_dump()
-    candidature_dict["user_id"] = fake_user_id
-    return crud.create_candidature(db, CandidatureCreateBis(**candidature_dict))
+    return crud.create_candidature_for_user(db, candidature, current_user.id)

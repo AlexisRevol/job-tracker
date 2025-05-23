@@ -4,7 +4,7 @@ from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.database import Base, engine
-from app.routes import candidatures
+from app.routes import auth, candidatures
 
 Base.metadata.create_all(bind=engine)
 
@@ -21,6 +21,7 @@ app.add_middleware(
 # Servir le dossier static à la racine /static
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
+app.include_router(auth.router, prefix="/auth", tags=["auth"])
 app.include_router(candidatures.router, prefix="/candidatures", tags=["Candidatures"])
 
 

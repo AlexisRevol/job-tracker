@@ -1,7 +1,7 @@
 from datetime import date
 from typing import Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class CandidatureBase(BaseModel):
@@ -21,14 +21,8 @@ class CandidatureCreate(CandidatureBase):
     Schéma utilisé pour créer une nouvelle candidature.
     Hérite de tous les champs de CandidatureBase.
     """
-    pass
 
-class CandidatureCreateBis(CandidatureBase):
-    """
-    Schéma utilisé pour créer une nouvelle candidature.
-    Hérite de tous les champs de CandidatureBase.
-    """
-    user_id : int
+    pass
 
 
 class Candidature(CandidatureBase):
@@ -41,5 +35,4 @@ class Candidature(CandidatureBase):
 
     id: int
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)

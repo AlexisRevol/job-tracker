@@ -46,6 +46,7 @@ def client(db_session):
     app.dependency_overrides[get_db] = override_get_db
     return TestClient(app)
 
+
 def create_fake_user(session):
     user = User(id=1, email="test@example.com", hashed_password="test")
     session.add(user)

@@ -3,18 +3,19 @@ from typing import List
 from sqlalchemy.orm import Session
 
 from app.models.candidature import Candidature as DBCandidature
-from app.models.user import User as DBUser
 from app.schemas.candidature import CandidatureCreate
 
 
-def get_candidatures(db: Session) -> List[DBCandidature]:
-    fake_user_id = 1
-    return db.query(DBCandidature).filter(DBCandidature.user_id == fake_user_id).all()
-    # return db.query(DBCandidature).all()
+def get_candidatures_for_user(db: Session, user_id: int) -> List[DBCandidature]:
+    return db.query(DBCandidature).filter(DBCandidature.user_id == user_id).all()
 
 
-def create_candidature(db: Session, candidature: CandidatureCreate) -> DBCandidature:
-    db_candidature = DBCandidature(**candidature.model_dump())
+def create_candidature_for_user(
+    db: Session, candidature: CandidatureCreate, user_id: int
+) -> DBCandidature:
+    data = candidature.model_dump()
+    data["user_id"] = user_id
+    db_candidature = DBCandidature(**data)
     db.add(db_candidature)
     db.commit()
     db.refresh(db_candidature)
