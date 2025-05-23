@@ -46,9 +46,9 @@ def client(db_session):
     app.dependency_overrides[get_db] = override_get_db
     return TestClient(app)
 
-
-def create_fake_user(session):
-    user = User(id=1, email="test@example.com", hashed_password="test")
-    session.add(user)
-    session.commit()
-    return user
+@pytest.fixture
+def auth_headers(client):
+    client.post("/auth/register", json={"email": "user@example.com", "password": "pass"})
+    login_res = client.post("/auth/login", data={"username": "user@example.com", "password": "pass"})
+    token = login_res.json()["access_token"]
+    return {"Authorization": f"Bearer {token}"}

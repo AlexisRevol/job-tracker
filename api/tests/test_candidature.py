@@ -1,9 +1,4 @@
-from tests.conftest import create_fake_user
-
-
-def test_add_candidature(client, db_session):
-    create_fake_user(db_session)
-
+def test_add_candidature(client, auth_headers):
     payload = {
         "entreprise": "TestCorp",
         "poste": "Testeur",
@@ -12,7 +7,8 @@ def test_add_candidature(client, db_session):
         "commentaire": "Test unitaire",
     }
 
-    response = client.post("/candidatures/", json=payload)
+    response = client.post("/candidatures/", json=payload, headers=auth_headers)
+
     assert response.status_code == 200
     data = response.json()
     assert data["entreprise"] == "TestCorp"
