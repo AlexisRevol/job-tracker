@@ -6,6 +6,7 @@ from sqlalchemy.orm import sessionmaker
 
 from app.database import Base, get_db
 from app.main import app
+from app.models.user import User
 
 # Import explicite du modèle AVANT create_all()
 
@@ -44,3 +45,9 @@ def client(db_session):
 
     app.dependency_overrides[get_db] = override_get_db
     return TestClient(app)
+
+def create_fake_user(session):
+    user = User(id=1, email="test@example.com", hashed_password="test")
+    session.add(user)
+    session.commit()
+    return user

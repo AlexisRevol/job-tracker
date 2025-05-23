@@ -21,8 +21,14 @@ class CandidatureCreate(CandidatureBase):
     Schéma utilisé pour créer une nouvelle candidature.
     Hérite de tous les champs de CandidatureBase.
     """
-
     pass
+
+class CandidatureCreateBis(CandidatureBase):
+    """
+    Schéma utilisé pour créer une nouvelle candidature.
+    Hérite de tous les champs de CandidatureBase.
+    """
+    user_id : int
 
 
 class Candidature(CandidatureBase):

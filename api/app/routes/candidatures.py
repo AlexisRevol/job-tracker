@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from app.crud import candidatures as crud
 from app.database import get_db
-from app.schemas.candidature import Candidature, CandidatureCreate
+from app.schemas.candidature import Candidature, CandidatureCreate, CandidatureCreateBis
 
 router = APIRouter()
 
@@ -36,4 +36,7 @@ def add_candidature(
     Returns:
         Candidature: La candidature créée avec son ID attribué.
     """
-    return crud.create_candidature(db, candidature)
+    fake_user_id = 1  # 🔥 simulé pour l'instant
+    candidature_dict = candidature.model_dump()
+    candidature_dict["user_id"] = fake_user_id
+    return crud.create_candidature(db, CandidatureCreateBis(**candidature_dict))

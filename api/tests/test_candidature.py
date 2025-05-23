@@ -1,4 +1,9 @@
-def test_add_candidature(client):
+from tests.conftest import create_fake_user
+
+
+def test_add_candidature(client, db_session):
+    create_fake_user(db_session)
+
     payload = {
         "entreprise": "TestCorp",
         "poste": "Testeur",
