@@ -6,7 +6,6 @@ from sqlalchemy.orm import sessionmaker
 
 from app.database import Base, get_db
 from app.main import app
-from app.models.user import User
 
 # Import explicite du modèle AVANT create_all()
 
@@ -46,9 +45,14 @@ def client(db_session):
     app.dependency_overrides[get_db] = override_get_db
     return TestClient(app)
 
+
 @pytest.fixture
 def auth_headers(client):
-    client.post("/auth/register", json={"email": "user@example.com", "password": "pass"})
-    login_res = client.post("/auth/login", data={"username": "user@example.com", "password": "pass"})
+    client.post(
+        "/auth/register", json={"email": "user@example.com", "password": "pass"}
+    )
+    login_res = client.post(
+        "/auth/login", data={"username": "user@example.com", "password": "pass"}
+    )
     token = login_res.json()["access_token"]
     return {"Authorization": f"Bearer {token}"}
