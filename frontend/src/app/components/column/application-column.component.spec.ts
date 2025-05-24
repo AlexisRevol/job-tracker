@@ -64,7 +64,7 @@ describe('ApplicationColumnComponent', () => {
       },
     ];
 
-    fixture.detectChanges(); // assure-toi qu'Angular détecte les changements
+    fixture.detectChanges();
 
     const event: CdkDragDrop<Candidature[]> = {
       previousContainer: { data: component.candidatures } as any,
@@ -78,17 +78,9 @@ describe('ApplicationColumnComponent', () => {
       event: {} as any,
     };
 
-    console.log(
-      'Before:',
-      component.candidatures.map((c) => c.id),
-    );
     component.onDrop(event);
-    console.log(
-      'After:',
-      component.candidatures.map((c) => c.id),
-    );
 
-    // Vérifie bien l’ordre
+    // Vérifier l’ordre
     expect(component.candidatures[0].id).toBe(2);
     expect(component.candidatures[1].id).toBe(1);
   });

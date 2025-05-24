@@ -24,36 +24,16 @@ export class AddCandidatureModalComponent implements OnChanges {
   @Output() candidatureAdded = new EventEmitter<Candidature>();
 
   validStatuts = ['Pas de réponse', 'En cours', 'Refusé', 'Accepté'];
-  candidature: Candidature = {
-    id: 0,
-    entreprise: '',
-    poste: '',
-    date_candidature: new Date(),
-    statut: 'Pas de réponse',
-    commentaire: '',
-  };
+  candidature: Candidature = this.getDefaultCandidature();
 
   ngOnChanges(changes: SimpleChanges) {
-    // biome-ignore lint/complexity/useLiteralKeys: accédé par index pour compatibilité TS
     if ('isOpen' in changes && changes['isOpen'] && this.isOpen) {
       this.resetForm();
     }
   }
-
+  
   resetForm() {
-    const statutParDefaut =
-      this.defaultStatut && this.validStatuts.includes(this.defaultStatut)
-        ? this.defaultStatut
-        : 'Pas de réponse';
-
-    this.candidature = {
-      id: 0,
-      entreprise: '',
-      poste: '',
-      date_candidature: new Date(),
-      statut: statutParDefaut,
-      commentaire: '',
-    };
+    this.candidature = this.getDefaultCandidature();
   }
 
   submitForm() {
@@ -63,5 +43,21 @@ export class AddCandidatureModalComponent implements OnChanges {
 
   close() {
     this.closeModal.emit();
+    this.resetForm();
+  }
+
+  private getDefaultCandidature(): Candidature {
+    const statut = this.validStatuts.includes(this.defaultStatut)
+      ? this.defaultStatut
+      : 'Pas de réponse';
+
+    return {
+      id: 0,
+      entreprise: '',
+      poste: '',
+      date_candidature: new Date(),
+      statut,
+      commentaire: '',
+    };
   }
 }

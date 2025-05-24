@@ -3,8 +3,8 @@
 </app-planner-header>
 
 <app-add-candidature-modal
-  [isOpen]="isModalOpen"
-  [defaultStatut]="modalColonneTitle"
+  [isOpen]="modalState.isOpen"
+  [defaultStatut]="modalState.title"
   (closeModal)="closeModal()"
   (candidatureAdded)="handleNewCandidature($event)">
 </app-add-candidature-modal>

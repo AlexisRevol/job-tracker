@@ -15,6 +15,7 @@ import {
   ApexTooltip,
   NgApexchartsModule,
 } from 'ng-apexcharts';
+import { ChartDataService } from 'app/services/chart-data.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -51,7 +52,7 @@ export class SplineAreaChartComponent implements OnChanges {
 
   public chartOptions: ChartOptions;
 
-  constructor() {
+  constructor(private chartDataService: ChartDataService) {
     this.chartOptions = {
       series: [],
       chart: {
@@ -72,46 +73,17 @@ export class SplineAreaChartComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    // biome-ignore lint/complexity/useLiteralKeys: accédé par index pour compatibilité TS
     if ('colonnes' in changes && changes['colonnes']) {
       this.updateChart();
     }
   }
 
   updateChart() {
-    // Récupérer toutes les dates uniques au format 'yyyy-MM-dd'
-    const allDatesSet = new Set<string>();
-    for (const col of this.colonnes) {
-      for (const c of col.candidatures) {
-        allDatesSet.add(formatDate(c.date_candidature, 'yyyy-MM-dd', 'fr'));
-      }
-    }
-    const allDates = Array.from(allDatesSet).sort();
-
-    // Pour chaque colonne (statut), compter les candidatures par date
-    const series = this.colonnes.map((col) => {
-      const data = allDates.map(
-        (dateStr) =>
-          col.candidatures.filter(
-            (c) =>
-              formatDate(c.date_candidature, 'yyyy-MM-dd', 'fr') === dateStr,
-          ).length,
-      );
-      return {
-        name: col.titre,
-        data: data,
-      };
-    });
-
-    const colors = this.colonnes.map(
-      (col) => this.colorMap.get(col.titre) ?? '#000000',
-    );
+    const { series, dates } = this.chartDataService.generateSeries(this.colonnes);
+    const colors = this.colonnes.map(col => this.colorMap.get(col.titre) ?? '#000000');
 
     this.chartOptions.series = series;
-    this.chartOptions.xaxis.categories = allDates;
-    this.chartOptions.fill = {
-      opacity: 0.7,
-      colors: colors,
-    };
+    this.chartOptions.xaxis.categories = dates;
+    this.chartOptions.fill = { opacity: 0.7, colors };
   }
 }

@@ -53,6 +53,8 @@ export class ApplicationsComponent implements OnInit, OnDestroy {
   openModalForColumn(titreColonne: string) {
     this.modalState.title = titreColonne;
     this.modalState.isOpen = true;
+
+    console.log("opening modal for ", this.modalState.title);
   }
 
   closeModal() {
