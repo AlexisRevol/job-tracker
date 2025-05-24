@@ -7,6 +7,7 @@
   height: 100%; /* Pour qu'il remplisse son conteneur dans la sidebar */
   display: flex;
   flex-direction: column;
+ /* overflow-y: auto;*/
 }
 
 .card-title {
@@ -38,6 +39,10 @@
 
 .performance-item:last-child {
   border-bottom: none;
+}
+
+.performance-item:hover {
+  background-color: #f8f9fa; 
 }
 
 .entreprise-info {

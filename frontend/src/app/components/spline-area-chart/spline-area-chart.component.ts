@@ -72,7 +72,7 @@ export class SplineAreaChartComponent implements OnChanges {
       series: [],
       chart: {
         type: 'area',
-        height: 280, // Ajustez selon l'espace disponible
+        height: 240, // Ajustez selon l'espace disponible
         fontFamily: fontFamily,
         foreColor: '#6B7280', // Couleur du texte général (axes, etc.) - Gray-500
         toolbar: {

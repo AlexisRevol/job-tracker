@@ -1,97 +1,240 @@
-.modal-backdrop {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.4);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	z-index: 100;
-	font-family: "Inter", sans-serif;
+/* Variables de couleurs */
+:host {
+  --primary-color: #007bff; 
+  --primary-color-dark: #0056b3;
+  --primary-color-light: #cfe2ff; /* Pour les focus/bordures claires */
+  --secondary-color: #6c757d; /* Gris pour actions secondaires */
+  --secondary-color-hover: #5a6268;
+  --text-color: #212529;
+  --text-muted-color: #6c757d; /* Gris pour labels */
+  --border-color: #ced4da; /* Gris clair pour bordures */
+  --input-bg: #fff;
+  --input-focus-border: var(--primary-color);
+  --input-focus-shadow: 0 0 0 0.2rem var(--primary-color-light);
+  --modal-bg: #ffffff;
+  --modal-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); /* Ombre plus douce */
+  --danger-color: #dc3545; /* Pour les erreurs (non implémenté ici mais utile) */
+  --font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-.modal {
-	background: #fff;
-	padding: 2rem;
-	border-radius: 12px;
-	width: 100%;
-	max-width: 480px;
-	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(17, 24, 39, 0.6); /* Fond plus sombre, type Tailwind bg-gray-900/60 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050; /* S'assurer qu'il est au-dessus d'autres éléments */
+  padding: 1rem; /* Pour que la modale ne colle pas aux bords sur mobile */
+  box-sizing: border-box;
+  font-family: var(--font-family);
+  /* Animation d'apparition (optionnel) */
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
 }
 
-h2 {
-	margin-bottom: 1.5rem;
-	font-size: 1.4rem;
-	font-weight: 600;
-	color: #333;
+.modal-container {
+  background: var(--modal-bg);
+  padding: 24px 28px; /* Espacement interne ajusté */
+  border-radius: 12px; /* Coins plus arrondis */
+  width: 100%;
+  max-width: 520px; /* Légèrement plus large */
+  box-shadow: var(--modal-shadow);
+  /* Animation d'ouverture (optionnel) */
+  transform: scale(0.95);
+  animation: scaleUp 0.3s forwards cubic-bezier(0.18, 0.89, 0.32, 1.28); /* Effet de "pop" */
 }
 
-.form-group {
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+@keyframes scaleUp {
+  to { transform: scale(1); }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; /* Plus d'espace */
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb; /* Bordure subtile type Tailwind gray-200 */
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.25rem; /* Taille ajustée */
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.modal-close-button {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem; /* Taille de l'icône */
+  color: var(--text-muted-color);
+  cursor: pointer;
+  padding: 4px; /* Zone de clic un peu plus grande */
+  line-height: 1;
+  border-radius: 50%;
+  transition: background-color 0.2s, color 0.2s;
+}
+.modal-close-button:hover {
+  background-color: #f3f4f6; /* Fond très clair au survol type Tailwind gray-100 */
+  color: var(--text-color);
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px; /* Espacement entre les champs */
+}
+
+.form-row { /* Pour mettre deux champs sur la même ligne */
+  display: flex;
+  gap: 16px;
+}
+.form-row > .form-field {
+  flex: 1; /* Chaque champ prend la moitié de l'espace */
 }
 
 .form-field {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  position: relative; /* Pour la flèche du select */
 }
 
 label {
-	font-size: 0.9rem;
-	margin-bottom: 0.4rem;
-	color: #555;
+  font-size: 0.875rem; /* 14px */
+  font-weight: 500; /* Un peu plus de poids */
+  margin-bottom: 6px;
+  color: var(--text-muted-color); /* Couleur plus douce */
 }
 
-input,
+input[type="text"],
+input[type="date"],
 select,
 textarea {
-	padding: 0.5rem 0.75rem;
-	border: 1px solid #ccc;
-	border-radius: 6px;
-	font-size: 0.95rem;
-	transition: border 0.2s;
+  padding: 10px 12px; /* Plus d'aération interne */
+  border: 1px solid var(--border-color);
+  border-radius: 8px; /* Coins plus arrondis */
+  font-size: 0.95rem;
+  color: var(--text-color);
+  background-color: var(--input-bg);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%; /* S'assurer qu'ils prennent toute la largeur du parent */
+  box-sizing: border-box; /* Inclure padding et border dans la largeur */
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af; /* Gris clair pour placeholder type Tailwind gray-400 */
+  opacity: 1; /* Firefox a besoin de ça */
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-	border-color: #007bff;
-	outline: none;
+  border-color: var(--input-focus-border);
+  outline: none;
+  box-shadow: var(--input-focus-shadow);
 }
 
-.actions {
-	display: flex;
-	justify-content: flex-end;
-	gap: 1rem;
-	margin-top: 1rem;
+/* Style spécifique pour le select pour le rendre plus moderne */
+.select-wrapper {
+  position: relative;
+}
+select {
+  appearance: none; /* Supprime l'apparence native */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 32px; /* Espace pour la flèche custom */
+}
+.select-wrapper .chevron-down-icon {
+  position: absolute;
+  right: 12px;
+  top: calc(50% + 10px); /* Ajuster pour aligner avec le texte du label */
+  transform: translateY(-50%);
+  pointer-events: none; /* Permet de cliquer sur le select en dessous */
+  color: var(--text-muted-color);
+  font-size: 1rem; /* Ou utilisez une icône SVG */
+}
+
+textarea {
+  min-height: 80px; /* Hauteur minimale */
+  resize: vertical; /* Permet le redimensionnement vertical uniquement */
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px; /* Espacement entre les boutons */
+  margin-top: 24px; /* Plus d'espace avant les actions */
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
 }
 
 .btn {
-	padding: 0.5rem 1rem;
-	font-size: 0.95rem;
-	border: none;
-	border-radius: 6px;
-	cursor: pointer;
-	transition: background 0.2s;
+  padding: 10px 20px; /* Boutons plus grands */
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s;
+  display: inline-flex; /* Pour aligner icône et texte */
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Espace entre icône et texte dans le bouton */
+}
+.btn:hover {
+  transform: translateY(-1px); /* Léger effet de soulèvement */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.btn:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .btn-primary {
-	background-color: #007bff;
-	color: white;
+  background-color: var(--primary-color);
+  color: white;
 }
-
 .btn-primary:hover {
-	background-color: #0056b3;
+  background-color: var(--primary-color-dark);
+}
+.btn-primary:disabled {
+  background-color: #a0cfff; /* Couleur pour primaire désactivé */
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+.btn-primary:disabled:hover {
+  background-color: #a0cfff; /* Garder la même couleur au survol si désactivé */
 }
 
 .btn-secondary {
-	background-color: #e0e0e0;
-	color: #333;
+  background-color: #f3f4f6; /* Fond gris très clair type Tailwind gray-100 */
+  color: var(--secondary-color);
+  border: 1px solid var(--border-color); /* Optionnel: bordure pour le secondaire */
+}
+.btn-secondary:hover {
+  background-color: #e5e7eb; /* Type Tailwind gray-200 */
+  border-color: #d1d5db; /* Type Tailwind gray-300 */
+  color: var(--text-color);
 }
 
-.btn-secondary:hover {
-	background-color: #ccc;
+/* Icônes (à remplacer par votre système d'icônes) */
+.icon::before {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
 }
+.times-icon::before { content: "\00D7"; } /* × */
+.chevron-down-icon::before { content: "▼"; font-size: 0.7em; }
+.plus-icon::before { content: "+"; font-size: 1.2em; font-weight: bold; }

@@ -1,41 +1,50 @@
-<div class="modal-backdrop" *ngIf="isOpen">
-  <div class="modal">
-    <h2>Ajouter une candidature</h2>
+<div class="modal-overlay" *ngIf="isOpen" (click)="close()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2 class="modal-title">Nouvelle Candidature</h2>
+      <button class="modal-close-button" (click)="close()" aria-label="Fermer la modale">
+        <i class="icon times-icon"></i> <!-- Exemple: × ou une icône SVG/Font -->
+      </button>
+    </div>
 
-    <form (ngSubmit)="submitForm()" #form="ngForm" class="form-group">
-      <div class="form-field">
-        <label for="entreprise">Entreprise</label>
-        <input id="entreprise" name="entreprise" [(ngModel)]="candidature.entreprise" required />
+    <form (ngSubmit)="submitForm()" #form="ngForm" class="modal-form">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="entreprise">Nom de l'entreprise</label>
+          <input type="text" id="entreprise" name="entreprise" [(ngModel)]="candidature.entreprise" required placeholder="Ex: Google, Acme Corp..." />
+        </div>
+
+        <div class="form-field">
+          <label for="poste">Intitulé du poste</label>
+          <input type="text" id="poste" name="poste" [(ngModel)]="candidature.poste" required placeholder="Ex: Développeur Web, Chef de projet..." />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="date">Date de candidature</label>
+          <input type="date" id="date" name="date_candidature" [(ngModel)]="candidature.date_candidature" required />
+        </div>
+
+        <div class="form-field select-wrapper"> <!-- Wrapper pour styler le select -->
+          <label for="statut">Statut</label>
+          <select id="statut" name="statut" [(ngModel)]="candidature.statut" required>
+            <option *ngFor="let statutOption of validStatuts" [value]="statutOption">{{ statutOption }}</option>
+          </select>
+          <i class="icon chevron-down-icon"></i> <!-- Flèche pour le select -->
+        </div>
       </div>
 
       <div class="form-field">
-        <label for="poste">Poste</label>
-        <input id="poste" name="poste" [(ngModel)]="candidature.poste" required />
+        <label for="commentaire">Notes / Commentaire (optionnel)</label>
+        <textarea id="commentaire" name="commentaire" [(ngModel)]="candidature.commentaire" rows="4" placeholder="Lien vers l'offre, contact, prochaines étapes..."></textarea>
       </div>
 
-      <div class="form-field">
-        <label for="date">Date de candidature</label>
-        <input type="date" id="date" name="date_candidature" [(ngModel)]="candidature.date_candidature" required />
-      </div>
-
-      <div class="form-field">
-        <label for="statut">Statut</label>
-        <select id="statut" name="statut" [(ngModel)]="candidature.statut" required>
-          <option value="Pas de réponse">Pas de réponse</option>
-          <option value="En cours">En cours</option>
-          <option value="Refusé">Refusé</option>
-          <option value="Accepté">Accepté</option>
-        </select>
-      </div>
-
-      <div class="form-field">
-        <label for="commentaire">Commentaire</label>
-        <textarea id="commentaire" name="commentaire" [(ngModel)]="candidature.commentaire" rows="3"></textarea>
-      </div>
-
-      <div class="actions">
-        <button type="submit" class="btn btn-primary">Ajouter</button>
+      <div class="modal-actions">
         <button type="button" class="btn btn-secondary" (click)="close()">Annuler</button>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+          <i class="icon plus-icon"></i> Ajouter Candidature
+        </button>
       </div>
     </form>
   </div>

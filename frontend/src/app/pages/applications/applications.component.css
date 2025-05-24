@@ -1,19 +1,85 @@
-:host { /* Si ces styles sont dans le CSS d'un composant Angular */
-  display: block;
-  height: calc(100vh - /* Hauteur de app-planner-header */ 60px); /* Exemple de hauteur, ajustez */
-  overflow: hidden; /* Empêche le scroll de la page entière si bien géré en interne */
+:host {
+  display: flex; /* Passage en flex pour gérer header + layout verticalement */
+  flex-direction: column;
+  height: 100vh; /* Prend toute la hauteur de la fenêtre */
+}
+
+.applications-layout {
+  display: flex;
+  flex-grow: 1; /* TRÈS IMPORTANT: Prend tout l'espace vertical restant après le header */
+  overflow: hidden;
+  min-height: 0; /* Important pour les contextes flex imbriqués pour éviter les dépassements */
+}
+
+.main-content {
+  flex-grow: 1; 
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  overflow: hidden;
+  min-width: 0; 
+  min-height: 0;
 }
 
 .kanban-board {
   display: flex;
   gap: 16px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding-bottom: 16px;
+  overflow-x: auto; 
+  overflow-y: hidden; /* PAS de scroll vertical pour le board lui-même,
+                         les colonnes doivent avoir une hauteur fixe (100% du board)
+                         et leur contenu interne scrolle. */
+  padding-bottom: 16px; 
+  flex-grow: 1; 
+  min-height: 0; /* Permet au kanban de rétrécir si nécessaire, mais flex-grow le fera s'étendre */
+}
+
+.charts-and-performance-row {
+  display: flex;
+  gap: 16px;
+  height: 220px;
+  flex-shrink: 0; /* Empêche cette rangée de rétrécir */
+  overflow: hidden; /* Les graphiques internes ne doivent pas déborder cette rangée */
+}
+
+.main-chart-container {
+  flex-grow: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-chart-container app-spline-area-chart {
+  flex-grow: 1; 
+  display: block; /* Nécessaire pour certains composants de graphiques */
+  /* La hauteur du graphique ApexCharts (height: 280 dans options) doit correspondre
+     ou être "auto" / "100%" si le graphique le supporte pour s'adapter au conteneur.
+     Ici, avec .charts-and-performance-row à 300px et du padding,
+     le conteneur du graphique sera un peu moins haut.
+     Le mieux est que le graphique s'adapte à son parent. */
+}
+
+.best-performances-container {
+  width: 300px;
   flex-shrink: 0;
-  /* height: 60%; ou une valeur fixe, comme défini précédemment */
-  height: calc(100% - 300px - 16px); /* Exemple: si la rangée chart+perf fait 300px de haut + gap */
-                                    /* Ajustez cette valeur dynamiquement ou en % */
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.best-performances-container app-best-performances {
+  flex-grow: 1;
+}
+
+.sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  padding: 16px;
+  border-left: 1px solid #e9ecef;
+  overflow-y: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .add-button {
@@ -28,119 +94,12 @@
 	border: 1px solid #e0e0e0;
 	font-family: "Inter", sans-serif;
 }
-
 .add-button:hover {
 	background-color: #fdfdfd;
 	box-shadow: 0 4px 12px rgba(240, 240, 240, 0.85);
 	cursor: pointer;
 }
-
-
-.applications-layout {
-  display: flex; /* Organise main-content et sidebar horizontalement */
-  height: 100%; /* Prend toute la hauteur disponible définie par :host */
-  overflow: hidden; /* Pour gérer le débordement interne */
-}
-
-
-
-.main-content {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column; /* Kanban au-dessus, puis la rangée charts-and-performance-row */
-  overflow: hidden;
-  padding: 16px;
-}
-
-
-.sidebar {
-  width: 280px; /* Largeur fixe pour la sidebar */
-  flex-shrink: 0; /* Empêche la sidebar de rétrécir */
-  padding: 16px;
-  border-left: 1px solid #e9ecef; /* Séparation visuelle */
-  overflow-y: auto; /* Si le contenu de la sidebar est long */
-  height: 100%; /* Prend toute la hauteur */
-}
-
-.sidebar app-daily-challenges,
-.sidebar app-best-performances {
-  /* Si vous voulez qu'ils prennent une certaine hauteur ou flexibilité */
-  /* Par exemple, si best-performances doit prendre le reste de la place :
-     app-best-performances { flex-grow: 1; min-height: 200px; }
-  */
-}
-
-/* Style pour la scrollbar du kanban (optionnel, pour un look plus fin) */
-.kanban-board::-webkit-scrollbar {
-  height: 8px;
-}
-
-.kanban-board::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
-
-.kanban-board::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 10px;
-}
-
-.kanban-board::-webkit-scrollbar-thumb:hover {
-  background: #bbb;
-}
-
-/* Style pour le conteneur du graphique si vous en avez un spécifique */
-/* Sinon, app-spline-area-chart sera le prochain élément flex dans .main-content */
-app-spline-area-chart {
-  flex-grow: 1; /* Prend l'espace restant dans .main-content */
-  display: block; /* Assure que le composant se comporte comme un bloc */
-  min-height: 250px; /* Hauteur minimale pour que le graphique soit visible */
-  /* Vous pouvez aussi ajouter un padding-top si besoin */
-  /* padding-top: 20px; */
-}
-
-.charts-and-performance-row {
-  display: flex; /* Aligne le graphique principal et best-performances horizontalement */
-  gap: 16px; /* Espace entre le graphique principal et best-performances */
-  flex-grow: 1; /* Prend l'espace restant dans .main-content */
-  min-height: 280px; /* Hauteur minimale pour cette rangée, ajustez */
-  /* max-height: 350px;  Optionnel: si vous voulez limiter sa hauteur */
-  overflow: hidden; /* Pour gérer le débordement interne si nécessaire */
-}
-
-.main-chart-container {
-  flex-grow: 1; /* Le graphique principal prend plus de place */
-  /* flex-basis: 70%;  Optionnel: pour donner un ratio de base */
-  min-width: 0; /* Important pour que flex-grow fonctionne correctement dans un conteneur flex */
-  display: flex; /* Pour que app-spline-area-chart puisse s'étendre */
-  flex-direction: column;
-}
-
-.main-chart-container app-spline-area-chart {
-  flex-grow: 1; /* Le graphique s'étend pour remplir son conteneur */
-}
-
-.best-performances-container {
-  width: 300px; /* Largeur fixe pour le composant best-performances, ajustez */
-  flex-shrink: 0; /* Empêche de rétrécir */
-  min-width: 0; /* Important pour flex */
-  display: flex; /* Pour que app-best-performances puisse s'étendre */
-  flex-direction: column;
-}
-
-.best-performances-container app-best-performances {
-  flex-grow: 1; /* Le composant s'étend pour remplir son conteneur */
-}
-
-/* Assurez-vous que la sidebar est toujours correcte */
-.sidebar {
-  width: 280px; /* Votre largeur actuelle */
-  flex-shrink: 0;
-  padding: 16px;
-  border-left: 1px solid #e9ecef;
-  overflow-y: auto;
-  /* height: 100%; Si :host a une hauteur fixe, sinon peut être problématique */
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+.kanban-board::-webkit-scrollbar { height: 8px; }
+.kanban-board::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+.kanban-board::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+.kanban-board::-webkit-scrollbar-thumb:hover { background: #bbb; }
