@@ -16,7 +16,8 @@ interface DailyChallenge {
   templateUrl: './daily-challenges.component.html',
   styleUrls: ['./daily-challenges.component.css'],
 })
-export class DailyChallengesComponent implements OnInit {
+export class DailyChallengesComponent {
+  //implements OnInit {
   challenges: DailyChallenge[] = [
     {
       title: 'Candidatures spontanées',
@@ -46,7 +47,7 @@ export class DailyChallengesComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  // ngOnInit(): void {}
 
   toggleChallenge(index: number) {
     this.challenges[index].completed = !this.challenges[index].completed;
