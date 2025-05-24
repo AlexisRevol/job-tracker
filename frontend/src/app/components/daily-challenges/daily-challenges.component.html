@@ -1,0 +1,19 @@
+<div class="daily-challenges">
+  <h3>🎯 Défis du jour</h3>
+
+  <div class="progress-bar">
+    <div class="progress" [style.width.%]="completionPercentage"></div>
+  </div>
+  <p class="progress-text">{{ completionPercentage }}% complétés</p>
+
+  <div class="challenge-card" *ngFor="let challenge of challenges; let i = index">
+    <div class="checkbox-container">
+      <input type="checkbox" [checked]="challenge.completed" (change)="toggleChallenge(i)" />
+    </div>
+    <div class="challenge-content">
+      <h4 [class.completed]="challenge.completed">{{ challenge.title }}</h4>
+      <p>{{ challenge.done }}/{{ challenge.goal }} réalisés</p>
+      <p>🕒 {{ challenge.estimatedTime }} · 📝 {{ challenge.lastUpdated }}</p>
+    </div>
+  </div>
+</div>

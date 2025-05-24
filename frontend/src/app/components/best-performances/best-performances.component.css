@@ -1,0 +1,134 @@
+.best-performances-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-family: "Inter", sans-serif;
+  height: 100%; /* Pour qu'il remplisse son conteneur dans la sidebar */
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #343a40;
+  margin-top: 0;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 8px;
+}
+
+.performance-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto; /* Si la liste est longue */
+  flex-grow: 1;
+}
+
+.performance-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto; /* Nom entreprise | Sparkline | Stats */
+  gap: 12px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f3f5;
+}
+
+.performance-item:last-child {
+  border-bottom: none;
+}
+
+.entreprise-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Pour text-overflow */
+}
+
+.entreprise-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #212529;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.entreprise-logo {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  margin-right: 8px;
+  object-fit: contain;
+}
+
+.sparkline-container {
+  width: 70px; /* Ajustez la largeur du sparkline */
+  height: 35px; /* Doit correspondre à la hauteur du graphique */
+  /* border: 1px solid #eee; */ /* Pour débogage */
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.total-candidatures {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #343a40;
+}
+
+.total-candidatures .label {
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: #868e96;
+  display: block;
+  line-height: 1;
+  text-transform: lowercase;
+}
+
+.evolution {
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.evolution .label-evolution {
+    font-size: 0.65rem;
+    color: #adb5bd;
+    display: block;
+}
+
+.evolution.positive {
+  color: #28a745; /* Vert moderne */
+}
+
+.evolution.negative {
+  color: #dc3545; /* Rouge moderne */
+}
+.evolution.neutral, .no-change {
+  color: #6c757d; /* Gris pour neutre */
+}
+
+.evolution .percentage {
+  font-size: 0.7rem;
+  margin-left: 4px;
+  opacity: 0.9;
+}
+
+.no-data-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  color: #868e96;
+  font-style: italic;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+}

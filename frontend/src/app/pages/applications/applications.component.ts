@@ -4,6 +4,7 @@ import { ApplicationColumnComponent } from 'app/components/column/application-co
 import { AddCandidatureModalComponent } from 'app/components/add-candidature-modal/add-candidature-modal.component';
 import { PlannerHeaderComponent } from 'app/components/planner-header/planner-header.component';
 import { SplineAreaChartComponent } from 'app/components/spline-area-chart/spline-area-chart.component';
+import { BestPerformancesComponent } from 'app/components/best-performances/best-performances.component';
 import { Candidature } from 'app/models/candidature.model';
 import { Colonne } from 'app/models/column.model';
 import { CandidatureService } from 'app/services/CandidatureService';
@@ -12,6 +13,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DailyChallengesComponent } from 'app/components/daily-challenges/daily-challenges.component';
 
 @Component({
   selector: 'app-applications',
@@ -22,12 +24,16 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     PlannerHeaderComponent,
     DragDropModule,
     SplineAreaChartComponent,
+    DailyChallengesComponent,
+    BestPerformancesComponent,
   ],
   templateUrl: './applications.component.html',
   styleUrl: './applications.component.css',
 })
 export class ApplicationsComponent implements OnInit, OnDestroy {
   colonnes: Colonne[] = [];
+  toutesMesCandidatures: Candidature[] = [];
+
   modalState = {
     isOpen: false,
     title: '',
@@ -42,7 +48,16 @@ export class ApplicationsComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((cols) => {
         this.colonnes = cols;
+        this.toutesMesCandidatures = this.getAllCandidaturesFromColonnes(cols);
       });
+  }
+
+  private getAllCandidaturesFromColonnes(colonnes: Colonne[]): Candidature[] {
+    if (!colonnes) {
+      return [];
+    }
+    // Utilise flatMap pour obtenir une liste unique de toutes les candidatures
+    return colonnes.flatMap((colonne) => colonne.candidatures || []);
   }
 
   ngOnDestroy() {

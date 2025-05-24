@@ -1,99 +1,143 @@
+/* Dans application-column.component.css */
+
+:host {
+  display: flex; /* Permet au composant hôte de bien se comporter en flex item */
+  flex-direction: column; /* Assure que le contenu interne est en colonne */
+  height: 100%; /* Important pour que le scroll interne fonctionne bien */
+}
+
 .column {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	padding: 0.5rem; /* un peu moins de padding */
-	border-radius: 8px;
-	min-width: 200px; /* réduit par rapport à 250px */
-	max-width: 220px; /* réduit par rapport à 300px */
-	box-sizing: border-box;
-	font-family: "Inter", sans-serif;
-}
-
-.column-title {
-	font-size: 1rem; /* légèrement plus petit */
-	font-weight: 600;
-	margin-bottom: 0.75rem; /* un peu moins d’espace */
-	color: #2c3e50;
-	border-bottom: 2px solid #e0e0e0;
-	padding-bottom: 0.4rem;
-}
-
-.cards {
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-}
-
-.cdk-drag-preview {
-	box-sizing: border-box;
-	border-radius: 4px;
-	box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px
-		rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
-}
-
-.cdk-drag-placeholder {
-	opacity: 0;
-}
-
-.cdk-drag-animating {
-	transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
-
-.placeholder {
-	color: #888;
-	font-style: italic;
-	font-size: 0.9rem;
-	text-align: center;
-	padding: 30px 10px;
-	user-select: none;
-	pointer-events: none;
-	background-color: #f5f5f5;
-	border-radius: 8px;
-	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.05);
-	transition: background-color 0.3s ease;
-}
-
-.candidature-list {
-	display: flex;
-	flex-direction: column;
-	gap: 0.7rem; /* réduit un peu l’écart entre les cartes */
-	max-height: 280px; /* réduit la hauteur pour ~3 cartes plus petites */
-	overflow-y: auto;
-	padding-right: 6px; /* espace pour le scroll */
+  flex: 1; /* Prend l'espace disponible si le parent est flex */
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa; /* Fond très léger pour la colonne */
+  border-radius: 10px; /* Coins arrondis plus modernes */
+  /* min-width: 200px;  Votre valeur actuelle, ajustez si besoin */
+  /* max-width: 220px;  Votre valeur actuelle, ajustez si besoin */
+  width: 250px; /* Essayez une largeur fixe ou jouez avec min/max */
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+  margin: 0 8px; /* Espace entre les colonnes (si le parent n'a pas de 'gap') */
+  /* box-shadow: 0 2px 4px rgba(0,0,0,0.02); Optionnel, ombre très discrète */
+  height: 100%; /* Force la colonne à prendre la hauteur disponible */
 }
 
 .column-header {
-	display: flex;
-	align-items: center; /* aligne verticalement */
-	justify-content: space-between; /* espace entre titre et bouton */
-	margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px; /* Plus d'espace dans l'en-tête */
+  border-bottom: 1px solid #e9ecef; /* Ligne de séparation subtile */
+  flex-shrink: 0; /* Empêche l'en-tête de rétrécir */
+}
+
+.column-title {
+  font-size: 0.9rem; /* Taille adaptée pour un titre de colonne */
+  font-weight: 600;
+  color: #343a40; /* Noir un peu plus doux */
+  margin: 0; /* Enlève la marge par défaut du h3 */
+  text-transform: capitalize; /* Met la première lettre en majuscule */
 }
 
 .add-candidature-btn {
-	background-color: transparent;
-	border: 1.5px solid #6c757d; /* gris doux */
-	border-radius: 50%;
-	width: 20px;
-	height: 20px;
-	font-size: 1rem;
-	color: #6c757d;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-	padding: 0;
-	line-height: 1;
+  background-color: transparent;
+  border: none; /* Plus épuré sans bordure */
+  border-radius: 6px; /* Coins légèrement arrondis, ou 50% pour un cercle */
+  width: 28px; /* Taille ajustée */
+  height: 28px;
+  font-size: 1.5rem; /* Taille du '+' */
+  color: #6c757d; /* Gris neutre */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, color 0.2s;
+  padding: 0;
+  line-height: 1;
 }
 
 .add-candidature-btn:hover {
-	background-color: #6c757d;
-	color: white;
-	border-color: #6c757d;
+  background-color: #e9ecef; /* Fond gris clair au survol */
+  color: #495057; /* Couleur du texte plus foncée */
 }
 
 .add-candidature-btn:focus {
-	outline: none;
-	box-shadow: 0 0 0 3px rgba(108, 117, 125, 0.5);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); /* Focus ring subtil */
+}
+
+.candidature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espacement entre les cartes, votre 0.7rem était bien aussi */
+  overflow-y: auto; /* Active le scroll vertical si nécessaire */
+  padding: 12px; /* Espace autour de la liste de cartes */
+  flex-grow: 1; /* TRÈS IMPORTANT: Permet à cette zone de s'étendre et d'utiliser le scroll */
+  min-height: 100px; /* Votre valeur, assure une zone de drop même vide */
+}
+
+/* --- Styles pour une scrollbar plus fine et moderne (WebKit browsers) --- */
+.candidature-list::-webkit-scrollbar {
+  width: 6px; /* Largeur de la scrollbar */
+}
+
+.candidature-list::-webkit-scrollbar-track {
+  background: transparent; /* Fond de la piste de la scrollbar */
+  border-radius: 10px;
+}
+
+.candidature-list::-webkit-scrollbar-thumb {
+  background-color: #ced4da; /* Couleur du "pouce" de la scrollbar */
+  border-radius: 10px;
+  border: 2px solid transparent; /* Crée un effet de padding autour du pouce */
+  background-clip: content-box;
+}
+
+.candidature-list::-webkit-scrollbar-thumb:hover {
+  background-color: #adb5bd; /* Couleur au survol */
+}
+/* --- Fin des styles de scrollbar --- */
+
+
+/* Styles pour le placeholder quand la liste est vide */
+.placeholder {
+  color: #868e96; /* Gris plus doux */
+  font-style: italic;
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 20px 10px; /* Padding ajusté */
+  user-select: none;
+  pointer-events: none;
+  background-color: rgba(233, 236, 239, 0.5); /* Fond très léger, semi-transparent */
+  border: 2px dashed #dee2e6; /* Bordure pointillée plus subtile */
+  border-radius: 8px;
+  margin: 10px 0; /* Marge pour ne pas coller aux bords si la liste est dans le padding de .candidature-list */
+  min-height: 70px; /* Hauteur minimale pour être bien visible */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Styles CDK (généralement corrects, mais vérifiez qu'ils ne sont pas surchargés) */
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 8px; /* Cohérent avec le style des cartes */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre plus prononcée pour l'élément draggué */
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.3; /* Rend le placeholder un peu visible */
+  background-color: #e0e0e0; /* Couleur de fond pour le placeholder */
+  border-radius: 8px; /* Cohérent */
+  /* Assurez-vous que le placeholder a la même hauteur que vos cartes pour éviter les sauts */
+  /* Vous pourriez copier certains styles de la carte ici ou utiliser une classe dédiée */
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.candidature-list.cdk-drop-list-dragging .app-candidature-card:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }

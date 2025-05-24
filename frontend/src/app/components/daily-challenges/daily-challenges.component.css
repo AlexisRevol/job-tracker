@@ -1,0 +1,88 @@
+.daily-challenges {
+  background-color: #ffffff;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(224, 224, 224, 0.03);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 320px;
+  font-family: 'Segoe UI', sans-serif;
+  box-sizing: border-box;
+}
+
+h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 0.5rem;
+  color: #333;
+}
+
+.progress-bar {
+  background-color: #e0e0e0;
+  height: 10px;
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress {
+  background: linear-gradient(90deg, #4caf50, #81c784);
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+  text-align: right;
+}
+
+.challenge-card {
+  display: flex;
+  align-items: flex-start;
+  background-color: #fafafa;
+  border: 1px solid #f0f0f0;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.challenge-card:hover {
+  transform: translateY(-2px);
+}
+
+.checkbox-container input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #4caf50;
+  margin-top: 5px;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.challenge-content {
+  flex: 1;
+}
+
+.challenge-content h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.challenge-content p {
+  margin: 0.2rem 0;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #aaa;
+}

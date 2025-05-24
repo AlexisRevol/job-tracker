@@ -1,0 +1,24 @@
+/* spline-area-chart.component.css */
+
+/* Exemple pour un tooltip personnalisé si on utilise tooltip.custom */
+/*
+.custom-tooltip {
+  background-color: rgba(30, 41, 59, 0.9); // bg-slate-800 avec opacité
+  color: #f1f5f9; // text-slate-100
+  padding: 8px 12px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  font-size: 12px;
+  font-family: "Inter", sans-serif;
+}
+.custom-tooltip div {
+  margin-bottom: 4px;
+}
+.custom-tooltip div:last-child {
+  margin-bottom: 0;
+}
+.custom-tooltip span {
+  font-weight: 600;
+  margin-right: 5px;
+}
+*/

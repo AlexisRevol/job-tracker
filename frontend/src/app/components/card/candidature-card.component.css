@@ -1,67 +1,92 @@
+:host {
+  display: block; /* Important pour que la carte prenne la largeur disponible si besoin */
+}
+
 .card {
-	background-color: #fff;
-	border-radius: 8px;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-	padding: 8px;
-	display: flex;
-	flex-direction: column;
-	gap: 4px;
-	border: 1px solid #e0e0e0;
-	font-family: "Inter", sans-serif;
-	font-size: 0.85rem;
+  background-color: #ffffff;
+  border-radius: 12px; /* Coins plus arrondis */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04); /* Ombre plus douce et moderne */
+  padding: 16px; /* Plus d'espace intérieur */
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espacement entre les éléments enfants */
+  font-family: "Inter", sans-serif;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Pour l'effet de survol */
+  border: 1px solid #eef2f7; /* Bordure très légère, optionnelle */
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
 .card-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+  display: flex;
+  justify-content: space-between; /* Si vous ajoutez des icônes ou actions ici */
+  align-items: center;
 }
 
 .poste {
-	font-size: 1rem;
-	font-weight: 600;
-	margin: 0;
-	color: #333;
+  font-size: 0.95rem; /* Un peu plus grand */
+  font-weight: 600;
+  margin: 0;
+  color: #1a202c; /* Noir plus doux */
+  line-height: 1.4;
 }
 
 .entreprise {
-	font-size: 0.9rem;
-	color: #666;
-}
-
-.status-badge {
-	padding: 4px 10px;
-	font-size: 0.65rem;
-	font-weight: 500;
-	border-radius: 8px;
-	text-transform: capitalize;
-	color: #fff;
-}
-
-.status-badge.refused {
-	background-color: #e3c8cd;
-	color: #8e4b51;
-}
-
-.status-badge.no-response {
-	background-color: #d4e6f6;
-	color: #4778ae;
-}
-
-.status-badge.in-progress {
-	background-color: #dee9ca;
-	color: #637d3f;
-}
-
-.status-badge.accepted {
-	background-color: #f4ecd1;
-	color: #86753f;
+  font-size: 0.9rem;
+  color: #4a5568; /* Gris plus foncé pour un meilleur contraste */
+  font-weight: 500;
 }
 
 .card-footer {
-	margin-top: 8px;
-	border-top: 1px solid #eee;
-	padding-top: 6px;
-	font-size: 0.8rem;
-	color: #999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto; /* Pousse le footer en bas si la carte a une hauteur fixe/min-height */
+  padding-top: 10px;
+  /* border-top: 1px solid #e2e8f0; Supprimé pour un look plus épuré, le gap suffit */
+  font-size: 0.8rem;
+}
+
+.date {
+  color: #718096; /* Gris moyen */
+  font-size: 0.75rem;
+}
+.status-badge {
+  padding: 3px 8px; /* Réduit : vertical 3px, horizontal 8px */
+  font-size: 0.7rem; /* Réduit pour que le texte soit plus petit */
+  font-weight: 500; /* Un peu moins gras peut aider à réduire la "masse" visuelle */
+  border-radius: 999px; /* Forme de pilule */
+  text-transform: capitalize;
+  /* letter-spacing: 0.5px;  Peut-être le supprimer ou réduire à 0.25px si besoin */
+  white-space: nowrap; /* TRÈS IMPORTANT : empêche le texte de passer à la ligne */
+  overflow: hidden; /* Cache ce qui dépasse */
+  text-overflow: ellipsis; /* Ajoute "..." si le texte est trop long et caché */
+  max-width: 100px; /* Optionnel: Limite la largeur maximale du badge si nécessaire */
+  display: inline-block; /* Assure que max-width fonctionne bien */
+  text-align: center; /* Centre le texte si le badge est plus large que le contenu */
+}
+
+/* Les couleurs des badges restent les mêmes que ma proposition précédente */
+.status-badge.refused {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+.status-badge.no-response { /* Cas spécifique pour "pas de réponse" */
+  background-color: #eef2f7;
+  color: #4b5563;
+}
+.status-badge.in-progress {
+  background-color: #dbeafe;
+  color: #2563eb;
+}
+.status-badge.accepted {
+  background-color: #d1fae5;
+  color: #059669;
+}
+.status-badge.interview {
+  background-color: #ffedd5;
+  color: #f97316;
 }

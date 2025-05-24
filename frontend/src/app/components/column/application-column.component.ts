@@ -25,6 +25,11 @@ export class ApplicationColumnComponent {
   }>();
   @Output() addCandidatureClick = new EventEmitter<string>();
 
+  trackById(index: number, item: Candidature): number {
+    // ou number si votre id est un nombre
+    return item.id; // Assurez-vous que vos candidatures ont un 'id' unique
+  }
+
   onDrop(event: CdkDragDrop<Candidature[]>) {
     if (event.previousContainer.data === event.container.data) {
       //if (event.previousContainer === event.container) {

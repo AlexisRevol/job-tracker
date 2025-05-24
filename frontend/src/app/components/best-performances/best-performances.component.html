@@ -1,0 +1,52 @@
+<div class="best-performances-card" *ngIf="entreprisesPerformantes.length > 0">
+  <h4 class="card-title">Top Entreprises</h4>
+  <ul class="performance-list">
+    <li *ngFor="let entreprise of entreprisesPerformantes" class="performance-item">
+      <div class="entreprise-info">
+        <span class="entreprise-name">{{ entreprise.nomEntreprise }}</span>
+        <!-- Optionnel: logo
+        <img *ngIf="entreprise.logoUrl" [src]="entreprise.logoUrl" alt="{{ entreprise.nomEntreprise }} logo" class="entreprise-logo">
+        -->
+      </div>
+
+      <div class="sparkline-container" *ngIf="entreprise.sparklineData.length > 0">
+        <apx-chart
+          [series]="[{ data: entreprise.sparklineData, name: 'Candidatures' }]"
+          [chart]="entreprise.sparklineOptions.chart"
+          [stroke]="entreprise.sparklineOptions.stroke"
+          [grid]="entreprise.sparklineOptions.grid"
+          [tooltip]="entreprise.sparklineOptions.tooltip"
+          [xaxis]="entreprise.sparklineOptions.xaxis"
+          [yaxis]="entreprise.sparklineOptions.yaxis"
+          [colors]="entreprise.sparklineOptions.colors"
+          [fill]="entreprise.sparklineOptions.fill"
+          [dataLabels]="entreprise.sparklineOptions.dataLabels"
+        ></apx-chart>
+      </div>
+
+      <div class="stats-container">
+        <span class="total-candidatures">{{ entreprise.totalCandidatures }} <span class="label"></span></span>
+        <div class="evolution" [ngClass]="{
+          'positive': entreprise.evolutionHebdoNombre > 0,
+          'negative': entreprise.evolutionHebdoNombre < 0,
+          'neutral': entreprise.evolutionHebdoNombre === 0 && entreprise.totalCandidatures > 0
+        }">
+          <span *ngIf="entreprise.evolutionHebdoNombre !== 0">
+            {{ entreprise.evolutionHebdoNombre > 0 ? '+' : '' }}{{ entreprise.evolutionHebdoNombre }}
+            <span class="percentage" *ngIf="entreprise.evolutionHebdoPourcentage !== 0">
+              ({{ entreprise.evolutionHebdoPourcentage > 0 ? '+' : '' }}{{ entreprise.evolutionHebdoPourcentage | number:'1.1-1' }}%)
+            </span>
+          </span>
+          <span *ngIf="entreprise.evolutionHebdoNombre === 0 && entreprise.totalCandidatures > 0 && entreprise.evolutionHebdoPourcentage === 0" class="no-change">
+             stable
+          </span>
+           <span class="label-evolution">cette semaine</span>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="entreprisesPerformantes.length === 0 && candidatures.length > 0" class="no-data-placeholder">
+  Pas encore assez de données pour les performances.
+</div>

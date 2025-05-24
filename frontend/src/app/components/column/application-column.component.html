@@ -1,22 +1,21 @@
 <div class="column">
   <div class="column-header">
     <h3 class="column-title">{{ title }}</h3>
-    <button class="add-candidature-btn" (click)="addCandidature()">+</button>
+    <button class="add-candidature-btn" (click)="addCandidature()" title="Ajouter une candidature">+</button>
   </div>
 
   <div
-    style="min-height: 100px;"
-    cdkDropList 
+    cdkDropList
     [cdkDropListData]="candidatures"
     (cdkDropListDropped)="onDrop($event)"
     class="candidature-list">
 
-    <!--<ng-container *ngIf="candidatures.length === 0">
-      <div class="placeholder">Déposez une candidature ici </div>
-    </ng-container>-->
-
-    <div *ngFor="let candidature of candidatures" cdkDrag>
+    <div *ngFor="let candidature of candidatures; trackBy: trackById" cdkDrag> <!-- Pensez à trackBy pour la performance -->
       <app-candidature-card [candidature]="candidature"></app-candidature-card>
+    </div>
+
+    <div *ngIf="candidatures.length === 0" class="placeholder">
+      Déposez une candidature ici <br> ou cliquez sur '+' pour en ajouter une.
     </div>
   </div>
 </div>

@@ -1,6 +1,5 @@
-<app-planner-header>
-
-</app-planner-header>
+<!-- applications.component.html -->
+<app-planner-header></app-planner-header>
 
 <app-add-candidature-modal
   [isOpen]="modalState.isOpen"
@@ -9,16 +8,34 @@
   (candidatureAdded)="handleNewCandidature($event)">
 </app-add-candidature-modal>
 
-<div class="kanban-board" cdkDropListGroup>
-  <ng-container *ngFor="let colonne of colonnes">
-    <app-application-column
-      [title]="colonne.titre"
-      [candidatures]="colonne.candidatures"
-      (candidatureMove)="onCandidatureMove($event)"
-      (addCandidatureClick)="openModalForColumn($event)"
-      >
-  </app-application-column>
-  </ng-container>
-</div>
+<div class="applications-layout">
+  <div class="main-content">
+    <!-- Kanban -->
+    <div class="kanban-board" cdkDropListGroup>
+      <ng-container *ngFor="let colonne of colonnes">
+        <app-application-column
+          [title]="colonne.titre"
+          [candidatures]="colonne.candidatures"
+          (candidatureMove)="onCandidatureMove($event)"
+          (addCandidatureClick)="openModalForColumn($event)">
+        </app-application-column>
+      </ng-container>
+    </div>
 
-<app-spline-area-chart [colonnes]="colonnes"></app-spline-area-chart>
+    <!-- NOUVEAU Conteneur pour Graphique Principal et Best Performances -->
+    <div class="charts-and-performance-row">
+      <div class="main-chart-container">
+        <app-spline-area-chart [colonnes]="colonnes"></app-spline-area-chart>
+      </div>
+      <div class="best-performances-container">
+        <app-best-performances [candidatures]="toutesMesCandidatures" [topN]="3"></app-best-performances>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <!-- Ce que vous aviez dans la sidebar, par exemple app-daily-challenges -->
+    <app-daily-challenges></app-daily-challenges>
+    <!-- Vous pouvez y ajouter d'autres éléments si besoin -->
+  </div>
+</div>
