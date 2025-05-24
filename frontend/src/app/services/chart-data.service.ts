@@ -1,10 +1,10 @@
-import { formatDate } from "@angular/common";
-import { Injectable } from "@angular/core";
-import { Colonne } from "app/models/column.model";
+import { formatDate } from '@angular/common';
+import { Injectable } from '@angular/core';
+import { Colonne } from 'app/models/column.model';
 
 @Injectable({ providedIn: 'root' })
 export class ChartDataService {
-  generateSeries(colonnes: Colonne[]): { series: any[], dates: string[] } {
+  generateSeries(colonnes: Colonne[]): { series: any[]; dates: string[] } {
     const allDatesSet = new Set<string>();
     for (const col of colonnes) {
       for (const c of col.candidatures) {
@@ -17,8 +17,9 @@ export class ChartDataService {
       const data = allDates.map(
         (dateStr) =>
           col.candidatures.filter(
-            (c) => formatDate(c.date_candidature, 'yyyy-MM-dd', 'fr') === dateStr,
-          ).length
+            (c) =>
+              formatDate(c.date_candidature, 'yyyy-MM-dd', 'fr') === dateStr,
+          ).length,
       );
       return { name: col.titre, data };
     });

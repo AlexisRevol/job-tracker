@@ -31,7 +31,7 @@ export class AddCandidatureModalComponent implements OnChanges {
       this.resetForm();
     }
   }
-  
+
   resetForm() {
     this.candidature = this.getDefaultCandidature();
   }

@@ -79,8 +79,12 @@ export class SplineAreaChartComponent implements OnChanges {
   }
 
   updateChart() {
-    const { series, dates } = this.chartDataService.generateSeries(this.colonnes);
-    const colors = this.colonnes.map(col => this.colorMap.get(col.titre) ?? '#000000');
+    const { series, dates } = this.chartDataService.generateSeries(
+      this.colonnes,
+    );
+    const colors = this.colonnes.map(
+      (col) => this.colorMap.get(col.titre) ?? '#000000',
+    );
 
     this.chartOptions.series = series;
     this.chartOptions.xaxis.categories = dates;

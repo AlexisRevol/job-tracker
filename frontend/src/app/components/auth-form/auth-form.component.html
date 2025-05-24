@@ -1,0 +1,60 @@
+      
+<form 
+  [formGroup]="authForm" 
+  (ngSubmit)="onSubmit()" 
+  class="auth-form mat-elevation-z8"
+  [class.shake-error]="!!authErrorMessage"> <!-- Ajout pour l'animation de secousse -->
+
+  <h2 class="title">{{ isLogin ? 'Se connecter' : 'Créer un compte' }}</h2>
+
+  <!-- Message d'erreur d'authentification global -->
+  <div *ngIf="authErrorMessage" class="auth-error-message">
+    <mat-icon color="warn" aria-hidden="true">error_outline</mat-icon>
+    <span>{{ authErrorMessage }}</span>
+  </div>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" type="email" required autocomplete="email" />
+    <mat-icon matPrefix>email</mat-icon>
+    <mat-error *ngIf="authForm.get('email')?.invalid && authForm.get('email')?.touched">
+      Email invalide
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Mot de passe</mat-label>
+    <input
+        matInput
+        [type]="hidePassword ? 'password' : 'text'"
+        formControlName="password"
+        required
+        autocomplete="current-password"
+    />
+    <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        (click)="hidePassword = !hidePassword"
+        [attr.aria-label]="hidePassword ? 'Afficher le mot de passe' : 'Masquer le mot de passe'"
+        [attr.aria-pressed]="!hidePassword"
+    >
+        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+    <mat-error *ngIf="authForm.get('password')?.invalid && authForm.get('password')?.touched">
+        Le mot de passe doit contenir au moins 6 caractères
+    </mat-error>
+  </mat-form-field>
+
+  <button 
+    mat-raised-button 
+    color="primary" 
+    type="submit" 
+    class="submit-btn" 
+    [disabled]="authForm.invalid || isLoading"> <!-- Désactiver aussi si isLoading -->
+    <ng-container *ngIf="!isLoading">
+      {{ isLogin ? 'Connexion' : 'Inscription' }}
+    </ng-container>
+    <mat-spinner *ngIf="isLoading" [diameter]="24" color="accent"></mat-spinner> <!-- Spinner -->
+  </button>
+</form>    

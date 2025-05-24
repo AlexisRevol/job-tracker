@@ -1,0 +1,138 @@
+.auth-form {
+  max-width: 420px;
+  margin: 2rem auto;
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.auth-form:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+
+.title {
+  font-weight: 600;
+  font-size: 1.8rem;
+  background: linear-gradient(to right, #905dcf, #486bcb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.submit-btn {
+  margin-top: 1rem; /* Ajusté */
+  padding: 0.7rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  background: linear-gradient(to right, #905dcf, #486bcb);
+  color: white !important;
+  box-shadow: 0 4px 8px rgba(144, 93, 207, 0.5);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative; /* Pour positionner le spinner correctement si besoin */
+  min-height: 48px; /* Pour éviter le changement de hauteur avec le spinner */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit-btn:disabled {
+  /* background: #e0e0e0 !important; */ /* Laissez Material gérer la couleur de fond désactivée */
+  /* color: #f4f4f4 !important; */
+  box-shadow: none !important;
+  /* border: 1px solid #bdbdbd !important; */ /* Le style désactivé de Material est souvent suffisant */
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.submit-btn:not(:disabled):hover {
+  background: linear-gradient(to right, #6d3b9e, #2f4a90);
+  box-shadow: 0 6px 14px rgba(70, 107, 203, 0.6);
+}
+
+/* Animation de secousse pour les erreurs */
+.shake-error {
+  animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-3px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(3px, 0, 0);
+  }
+}
+
+/* Assurer que le spinner Material est blanc sur le bouton primaire */
+.submit-btn mat-spinner ::ng-deep .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: white !important;
+}
+/* Fallback pour les anciennes versions de Material (avant MDC) */
+.submit-btn mat-spinner ::ng-deep .mat-progress-spinner circle {
+  stroke: white !important;
+}
+
+/* Pour les versions d'Angular Material basées sur MDC (Material Design Components, souvent à partir d'Angular 15+) */
+.mat-mdc-input-element {
+  color: #333333 !important; /* Ou une autre couleur foncée de ton choix */
+  /* Pour le placeholder également si besoin */
+}
+
+.mat-mdc-form-field input.mat-mdc-input-element::placeholder {
+  color: #757575 !important; /* Couleur plus claire pour le placeholder */
+}
+
+.submit-btn.loading {
+  pointer-events: none; /* désactive les clics */
+  background: linear-gradient(to right, #6d3b9e, #2f4a90);
+  box-shadow: 0 6px 14px rgba(70, 107, 203, 0.6);
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Style pour le message d'erreur global */
+.auth-error-message {
+  background-color: #fceded; /* Rouge très clair */
+  color: #5f2120; /* Rouge foncé pour le texte */
+  border: 1px solid #f7c9c8; /* Bordure rouge clair */
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem; /* Espacement avant les champs */
+}
+
+.auth-error-message mat-icon {
+  font-size: 1.25rem;
+  height: 1.25rem;
+  width: 1.25rem;
+  color: #d9534f; /* Rouge pour l'icône d'erreur */
+}
