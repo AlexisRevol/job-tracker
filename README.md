@@ -18,41 +18,38 @@
 
 ---
 
-## ✨ Fonctionnalités Principales
+##  Fonctionnalités Principales
 
-*   🔐 **Authentification Sécurisée :** Système complet de création de compte et de connexion basé sur des **tokens JWT** (Access & Refresh tokens) pour sécuriser l'accès aux données de chaque utilisateur.
-*   📊 **Dashboard Analytique :** Une page d'accueil dynamique qui présente des statistiques clés sur vos candidatures (nombre total, statuts, etc.) pour une visualisation rapide de votre progression.
-*   ⚙️ **Gestion Complète (CRUD) :** Interface intuitive pour créer, lire, mettre à jour et supprimer des candidatures avec des informations détaillées.
-*   ✅ **Tests Automatisés :** Le projet est couvert par des tests unitaires et d'intégration pour le backend (`pytest`) et des tests unitaires pour le frontend (`Karma`), garantissant la stabilité et la fiabilité de l'application. [1]
-*   🚀 **CI/CD avec GitHub Actions :** Un pipeline d'intégration continue est configuré pour lancer automatiquement les tests du backend et du frontend à chaque `push`, assurant ainsi la non-régression et la qualité du code en permanence. [1]
-*   📖 **API Auto-Documentée :** L'API FastAPI génère automatiquement une documentation interactive via **Swagger UI** et **ReDoc**, rendant l'API facile à comprendre et à tester.
+*   **Authentification Sécurisée :** Système de création de compte et de connexion basé sur des **tokens JWT**.
+*   **Dashboard Analytique :** Une page d'accueil dynamique qui présente des statistiques clés sur vos candidatures.
+*   **Gestion Complète (CRUD) :** Interface pour créer, lire, mettre à jour et supprimer des candidatures.
+*   **Tests Automatisés :** Des tests unitaires pour le backend (`pytest`) et des tests unitaires pour le frontend (`Karma`)
+*   **CI/CD avec GitHub Actions :** Un pipeline d'intégration continue pour lancer automatiquement les tests du backend et du frontend
+*   **API Auto-Documentée :** L'API FastAPI génère automatiquement une documentation interactive via **Swagger UI**
 
 ---
 
 ## 🛠️ Architecture et Stack Technique
 
-### 🐍 **Backend (API RESTful)**
-
-Le backend est construit sur une architecture solide, découplée et performante, en utilisant des outils de premier plan de l'écosystème Python.
+###  **Backend (API RESTful)**
 
 -   **Framework :** **FastAPI** pour sa rapidité (basé sur Starlette et Pydantic), son typage moderne et ses performances asynchrones.
--   **Gestion de Projet :** **Poetry** pour une gestion des dépendances déterministe et un environnement de développement isolé. [1]
--   **ORM :** **SQLAlchemy** pour une interaction sûre et flexible avec la base de données (SQLite par défaut).
+-   **Gestion de Projet :** **Poetry** pour une gestion des dépendances déterministe et un environnement de développement isolé.
+-   **ORM :** **SQLAlchemy** pour une interaction sûre et flexible avec la base de données.
 -   **Validation :** **Pydantic** pour la validation, la sérialisation et la documentation automatiques des modèles de données.
--   **Tests :** **Pytest** pour une suite de tests complète, testant les endpoints, la logique métier et les interactions avec la base de données. [1]
+-   **Tests :** **Pytest** pour une suite de tests complète.
 
-### 🅰️ **Frontend (Single Page Application)**
+###  **Frontend (Single Page Application)**
 
-Le frontend est une SPA moderne et réactive, offrant une expérience utilisateur fluide.
+Le frontend est une SPA moderne et réactive
 
--   **Framework :** **Angular** pour sa structure robuste, son écosystème complet et ses performances.
+-   **Framework :** **Angular** pour sa structure robuste et ses performances.
 -   **Langage :** **TypeScript** pour un code plus sûr, plus lisible et plus maintenable.
--   **State Management :** Services Angular et programmation réactive (RxJS) pour gérer l'état de l'application.
--   **Tests :** **Karma** et **Jasmine** pour les tests unitaires des composants, assurant la fiabilité de l'interface utilisateur.
+-   **Tests :** **Karma** et **Jasmine** pour les tests unitaires de l'interface utilisateur.
 
 ---
 
-## 🚀 Lancement en Local
+## Lancement en Local
 
 ### Prérequis
 *   Node.js et npm
@@ -77,15 +74,16 @@ cd backend/
 poetry install
 
 # Activer l'environnement virtuel
-poetry shell
+Invoke-Expression $(poetry env activate)
 
-# Lancer le serveur (avec hot-reload)
+# Lancer le serveur 
 uvicorn main:app --reload
 ```
-> 🔹 L'API sera disponible sur `http://127.0.0.1:8000`.
-> 🔹 La documentation Swagger UI est sur `http://127.0.0.1:8000/docs`.
+>  L'API sera disponible sur `http://127.0.0.1:8000`
 
-### 3. Lancer le Frontend (dans un autre terminal)
+>  La documentation Swagger UI est sur `http://127.0.0.1:8000/docs`
+
+### 3. Lancer le Frontend
 
 ```bash
 # Aller dans le dossier frontend
@@ -97,15 +95,12 @@ npm install
 # Lancer le serveur de développement
 ng serve
 ```
-> 🔸 L'application sera accessible sur `http://localhost:4200/`.
+> L'application sera accessible sur `http://localhost:4200/`.
 
 ---
 
-## 👤 Auteur
+## Auteur
 
 **Alexis Revol**
 
 *   **GitHub :** [@AlexisRevol](https://github.com/AlexisRevol)
-*   **LinkedIn :** [linkedin.com/in/alexis-revol-b68427180/](https://www.linkedin.com/in/alexis-revol-b68427180/)
-
-Un projet construit avec passion pour démontrer des compétences concrètes en développement full-stack. N'hésitez pas à me contacter pour toute question ou opportunité !
